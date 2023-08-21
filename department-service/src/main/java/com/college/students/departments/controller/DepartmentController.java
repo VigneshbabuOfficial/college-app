@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.college.students.departments.dto.DepartmentInputDTO;
 import com.college.students.departments.dto.ResponseDTO;
 import com.college.students.departments.service.DepartmentService;
 
@@ -17,7 +20,7 @@ import com.college.students.departments.service.DepartmentService;
 @RequestMapping("/departments")
 public class DepartmentController {
 
-	private static final Logger log = LoggerFactory.getLogger(DepartmentController.class);
+	private final Logger log = LoggerFactory.getLogger(this.getClass().getName());
 
 	@Autowired
 	private DepartmentService service;
@@ -27,22 +30,29 @@ public class DepartmentController {
 	// @formatter:off
 	@RequestParam(name = "filter",required = false) String filterParam,
 	@RequestParam(name = "sort",required = false) String sortParam, 
-	@RequestParam(name = "page",required = false) Integer page,
-	@RequestParam(name = "limit",required = false) Integer limit
+	@RequestParam(name = "page",required = false,defaultValue = "1") Integer page,
+	@RequestParam(name = "limit",required = false, defaultValue = "10") Integer limit
 	// @formatter:on
 	) {
 
-		log.info("method = {}, filterParam = {} , sortParam = {}, page = {}, limit = {}", "getDepartments", filterParam,
-				sortParam, page, limit);
+		// TODO: need to check the debug logs in console issue
+		log.debug("method = {}, filterParam = {} , sortParam = {}, page = {}, limit = {}", "getDepartments",
+				filterParam, sortParam, page, limit);
 
 		return service.getDepartments(filterParam, sortParam, page, limit);
 
 	}
 
-	@GetMapping("/:id")
+	@GetMapping(path = "/{id}")
 	public ResponseEntity<ResponseDTO> getDepartmentById(@PathVariable Long id) {
-		log.info("method = {}, id = {}", "getDepartmentById", id);
+		log.debug("method = {}, id = {}", "getDepartmentById", id);
 		return service.getDepartmentById(id);
+	}
+
+	@PostMapping
+	public ResponseEntity<ResponseDTO> addDepartment(@RequestBody(required = true) DepartmentInputDTO departmentInput) {
+		log.debug("method = {}, departmentInput = {}", "addDepartment", departmentInput);
+		return service.addDepartment(departmentInput);
 	}
 
 }

@@ -32,3 +32,9 @@ spring:
 logging:
   level:
     root: info
+    com.college.students: debug
+  file: 
+    path: logs/
+    name: logs/my-app.log    
+
+
