@@ -1,4 +1,4 @@
-package com.college.students.departments;
+package com.college.departments;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

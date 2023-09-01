@@ -1,4 +1,4 @@
-package com.college.students.departments.entity;
+package com.college.departments.entity;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import com.college.students.departments.enums.Departments;
+import com.college.departments.enums.Departments;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

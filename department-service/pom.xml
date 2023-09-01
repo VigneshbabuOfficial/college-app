@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.college.students.departments</groupId>
+	<groupId>com.college.departments</groupId>
 	<artifactId>department-service</artifactId>
 	<!--<version>1.0.0</version>-->
 	<packaging>war</packaging>
 	<name>department-service</name>
-	<description>Demo project for Spring Boot - college-students-departmetns</description>
+	<description>Demo project for Spring Boot - college-departmetns</description>
 	
 	<parent>
 		<groupId>org.springframework.boot</groupId>

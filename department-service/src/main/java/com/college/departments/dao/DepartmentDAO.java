@@ -1,21 +1,21 @@
-package com.college.students.departments.dao;
+package com.college.departments.dao;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.college.students.departments.dto.DepartmentInputDTO;
-import com.college.students.departments.entity.Department;
-import com.college.students.departments.repository.DepartmentRepository;
+import com.college.departments.dto.DepartmentInputDTO;
+import com.college.departments.entity.Department;
+import com.college.departments.repository.DepartmentRepository;
+import com.college.departments.utils.CustomLogger;
 
 @Repository
 public class DepartmentDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(DepartmentDAO.class);
+	@Autowired
+	private CustomLogger log;
 
 	@Autowired
 	private DepartmentRepository repository;
@@ -32,7 +32,7 @@ public class DepartmentDAO {
 
 	public Department addDepartment(DepartmentInputDTO departmentInput) {
 
-		log.debug("method = {}, departmentInput = {}", "addDepartment", departmentInput);
+		log.debug("method = addDepartment, departmentInput = " + departmentInput);
 
 		Department newDepartment = Department.builder().name(departmentInput.getName())
 				.comments(departmentInput.getComments()).build();

@@ -1,4 +1,4 @@
-package com.college.students.departments.config;
+package com.college.departments.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

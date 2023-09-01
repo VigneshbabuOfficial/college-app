@@ -1,7 +1,5 @@
-package com.college.students.departments.controller;
+package com.college.departments.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.college.students.departments.dto.DepartmentInputDTO;
-import com.college.students.departments.dto.ResponseDTO;
-import com.college.students.departments.service.DepartmentService;
+import com.college.departments.dto.DepartmentInputDTO;
+import com.college.departments.dto.ResponseDTO;
+import com.college.departments.service.DepartmentService;
+import com.college.departments.utils.CustomLogger;
 
 @RestController
 @RequestMapping("/departments")
 public class DepartmentController {
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass().getName());
+	@Autowired
+	private CustomLogger log;
 
 	@Autowired
 	private DepartmentService service;
@@ -35,9 +35,8 @@ public class DepartmentController {
 	// @formatter:on
 	) {
 
-		// TODO: need to check the debug logs in console issue
-		log.debug("method = {}, filterParam = {} , sortParam = {}, page = {}, limit = {}", "getDepartments",
-				filterParam, sortParam, page, limit);
+		log.debug("method = getDepartments, filterParam = " + filterParam + " , sortParam = " + sortParam + ", page = "
+				+ page + ", limit = " + limit);
 
 		return service.getDepartments(filterParam, sortParam, page, limit);
 
@@ -45,13 +44,13 @@ public class DepartmentController {
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<ResponseDTO> getDepartmentById(@PathVariable Long id) {
-		log.debug("method = {}, id = {}", "getDepartmentById", id);
+		log.debug("method = getDepartmentById, id = " + id);
 		return service.getDepartmentById(id);
 	}
 
 	@PostMapping
 	public ResponseEntity<ResponseDTO> addDepartment(@RequestBody(required = true) DepartmentInputDTO departmentInput) {
-		log.debug("method = {}, departmentInput = {}", "addDepartment", departmentInput);
+		log.debug("method = addDepartment, departmentInput = " + departmentInput);
 		return service.addDepartment(departmentInput);
 	}
 

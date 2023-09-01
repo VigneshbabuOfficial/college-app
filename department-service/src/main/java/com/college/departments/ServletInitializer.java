@@ -1,4 +1,4 @@
-package com.college.students.departments;
+package com.college.departments;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

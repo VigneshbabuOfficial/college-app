@@ -1,4 +1,4 @@
-package com.college.students.departments.enums;
+package com.college.departments.enums;
 
 public enum Departments {
 

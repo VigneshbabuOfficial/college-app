@@ -1,4 +1,4 @@
-package com.college.students.departments.controller;
+package com.college.departments.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

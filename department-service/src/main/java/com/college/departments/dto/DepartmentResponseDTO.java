@@ -1,11 +1,11 @@
-package com.college.students.departments.dto;
+package com.college.departments.dto;
 
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.college.students.departments.entity.Department;
-import com.college.students.departments.enums.Departments;
+import com.college.departments.entity.Department;
+import com.college.departments.enums.Departments;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

@@ -1,10 +1,10 @@
-package com.college.students.departments.dto;
+package com.college.departments.dto;
 
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-import com.college.students.departments.enums.Departments;
+import com.college.departments.enums.Departments;
 
 public class DepartmentInputDTO implements Serializable {
 
