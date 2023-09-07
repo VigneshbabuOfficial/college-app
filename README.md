@@ -14,6 +14,8 @@
 
 > filter, sort & pagination  params=TODO
 
+> mockito test case
+
 > openapi=TODO
 
 > flywayDB=TODO
