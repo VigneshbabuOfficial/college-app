@@ -12,7 +12,9 @@
 
 > @Slf4j - log management- separate log=TODO
 
-> filter, sort & pagination  params=TODO
+> filter, sort & pagination  params=DONE
+
+> Update & Delete=TODO
 
 > mockito test case
 
