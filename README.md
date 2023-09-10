@@ -10,7 +10,7 @@
 ### phase-1
 > java.util.logging - log management- separate log=DONE
 
-> @Slf4j - log management- separate log=TODO
+> @Slf4j - log management- separate log=TODO ( any one of the services )
 
 > filter, sort & pagination  params=DONE
 
