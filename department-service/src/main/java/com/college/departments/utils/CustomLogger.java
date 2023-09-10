@@ -172,4 +172,8 @@ public class CustomLogger implements Serializable {
 
 	}
 
+	public static String logKeyValue(String key, Object value) {
+		return ", " + key + " = " + value;
+	}
+
 }
