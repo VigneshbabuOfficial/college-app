@@ -9,6 +9,7 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.college.departments.utils.CustomLogger;
 import com.college.departments.utils.RequestId;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 
 @SpringBootApplication
 public class DepartmentServiceApplication {
@@ -19,7 +20,12 @@ public class DepartmentServiceApplication {
 
 	@Bean
 	public ObjectMapper objectMapper() {
-		return new ObjectMapper();
+		ObjectMapper mapper = new ObjectMapper();
+
+		// to support optional feature
+		mapper.registerModule(new Jdk8Module());
+
+		return mapper;
 	}
 
 	@Bean

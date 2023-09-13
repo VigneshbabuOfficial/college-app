@@ -1,6 +1,7 @@
 package com.college.departments.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.college.departments.enums.Departments;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,5 +52,17 @@ public class Department implements Serializable {
 
 	@Column(name = "comments", columnDefinition = "character varying(255)")
 	private String comments;
+
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+	@Column(name = "created_at")
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	private LocalDateTime createdAt;
+
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+	@Column(name = "updated_at")
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	private LocalDateTime updatedAt;
 
 }

@@ -2,6 +2,8 @@ package com.college.departments.dao;
 
 import static com.college.departments.utils.CustomLogger.logKeyValue;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,10 +22,12 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
 import com.college.departments.dto.DepartmentInputDTO;
 import com.college.departments.entity.Department;
+import com.college.departments.enums.Departments;
 import com.college.departments.repository.DepartmentRepository;
 import com.college.departments.utils.CustomLogger;
 import com.college.departments.utils.EntityUtil;
@@ -46,8 +50,9 @@ public class DepartmentDAO {
 
 		log.debug("method = addDepartment, departmentInput = " + departmentInput);
 
-		Department newDepartment = Department.builder().name(departmentInput.getName())
-				.comments(departmentInput.getComments()).build();
+		Department newDepartment = Department.builder().name(Departments.valueOf(departmentInput.getName().get()))
+				.comments(departmentInput.getComments().get())
+				.createdAt(LocalDateTime.now(ZoneId.of("UTC")).withNano(0)).build();
 
 		return repository.save(newDepartment);
 	}
@@ -148,6 +153,25 @@ public class DepartmentDAO {
 		countCriteriaQuery.where(countPredicates.toArray(new Predicate[countPredicates.size()]));
 
 		return entityManager.createQuery(countCriteriaQuery).getSingleResult();
+	}
+
+	public Optional<Department> isDepartmentExist(Departments name, Long id) {
+		log.info(
+				String.format(METHOD_LOG_STR, "isDepartmentExist") + logKeyValue("name", name) + logKeyValue("id", id));
+		if (id == null) {
+			return repository.findOne(Example.of(Department.builder().name(name).build()));
+		} else {
+			return repository.findByNameAndIdNot(name, id);
+		}
+	}
+
+	public List<Department> findAllByIds(List<Long> ids) {
+		log.info(String.format(METHOD_LOG_STR, "findAllByIds") + logKeyValue("ids", ids));
+		return repository.findAllById(ids);
+	}
+
+	public void deleteDepartments(List<Department> departments) {
+		repository.deleteAll(departments);
 	}
 
 }

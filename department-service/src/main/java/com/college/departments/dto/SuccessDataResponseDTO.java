@@ -12,8 +12,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class SuccessResponseDTO implements ResponseDTO {
+public class SuccessDataResponseDTO implements ResponseDTO {
 
+	@Builder.Default
 	private List<?> data = new ArrayList<>();
 	@Builder.Default
 	private int page = 1;

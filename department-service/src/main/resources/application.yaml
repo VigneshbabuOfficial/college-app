@@ -7,6 +7,14 @@ server:
 
 #application props    
 spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+    deserialization:
+      fail-on-unknown-properties: false
+    mapper:
+      ALLOW_COERCION_OF_SCALARS: false
+      
 #  application:
 #    name: department-service
 
@@ -27,7 +35,7 @@ spring:
 #     lob:
 #        '[non_contextual_creation]': true
            
-
+  
 #log props
 logging:
   level:
