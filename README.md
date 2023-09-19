@@ -8,8 +8,8 @@
 
 
 ### phase-1
-- [ ] wildfly = DONE 
-- [ ] postgres ( DONE ) + mysql 
+* [ ] wildfly = DONE 
+* [ ] postgres ( DONE ) + mysql 
 - [ ] java.util.logging - log management- separate log = DONE
 - [ ] filter, sort & pagination params = DONE
 - [ ] springboot crud = DONE
