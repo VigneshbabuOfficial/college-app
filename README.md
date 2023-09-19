@@ -8,36 +8,59 @@
 
 
 ### phase-1
-* [ ] wildfly = DONE 
-* [ ] postgres ( DONE ) + mysql 
-- [ ] java.util.logging - log management- separate log = DONE
-- [ ] filter, sort & pagination params = DONE
-- [ ] springboot crud = DONE
-- [ ] mockito test case = in progress
-- [ ] spring cache 
+> wildfly = DONE
+> 
+> postgres ( DONE ) + mysql
+> 
+> java.util.logging - log management- separate log = DONE
+> 
+> filter, sort & pagination params = DONE
+> 
+> springboot crud = DONE
+> 
+> mockito test case = in progress
+> 
+> spring cache 
 ---------------------------------------
-- [ ] microservices
-- [ ] pomparent after 2 services
-- [ ] @Slf4j - log management- separate log ( any one of the services )
-- [ ] openapi
-- [ ] flywayDB
-- [ ] apigateway
-- [ ] kafka
+> microservices
+> 
+> pomparent after 2 services
+> 
+> @Slf4j - log management- separate log ( any one of the services )
+> 
+> openapi
+> 
+> flywayDB
+> 
+> apigateway
+> 
+> kafka
 ---------------------------------------
-- [ ] authentication & authorization  ( max session = 1 )
-- [ ] own user account
-- [ ] github 
-- [ ] gmail 
-- [ ] facebook 
-- [ ] linkedin
-- [ ] webhooks
+> authentication & authorization  ( max session = 1 )
+> 
+> own user account
+> 
+> github
+> 
+> gmail
+> 
+> facebook
+> 
+> linkedin
+> 
+> webhooks
 ---------------------------------------
-- [ ] deployment
-- [ ] Github pipeline 
-- [ ] AWS 
-- [ ] jenkins 
-- [ ] docker 
-- [ ] kubernetes
+> deployment
+> 
+> Github pipeline
+> 
+> AWS
+> 
+> jenkins
+> 
+> docker
+> 
+> kubernetes
 ______________________________________________________________
 
 ### Database Table Design DOCs
