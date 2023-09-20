@@ -18,7 +18,7 @@
 > 
 > DONE = springboot crud
 > 
-> in progress = mockito test case
+> DONE = mockito test case
 > 
 > spring cache
 ---------------------------------------
