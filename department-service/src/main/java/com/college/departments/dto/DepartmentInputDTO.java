@@ -11,7 +11,7 @@ public class DepartmentInputDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotBlankForOptional(message = "Invalid Department name. Accepted values are ME, ECE, EEE, CSE, IT", groups = Create.class)
+	@NotBlankForOptional(message = "Department name is mandatory and accepted values are ME, ECE, EEE, CSE, IT", groups = Create.class)
 	private Optional<@Pattern(regexp = "\\bME|ECE|EEE|CSE|IT\\b", message = "Invalid Department name. Accepted values are ME, ECE, EEE, CSE, IT", groups = {
 			Create.class, Update.class }) String> name;
 

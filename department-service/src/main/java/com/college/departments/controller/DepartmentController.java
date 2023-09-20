@@ -5,7 +5,6 @@ import static com.college.departments.utils.CustomLogger.logKeyValue;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -37,19 +36,23 @@ public class DepartmentController {
 
 	private static final String METHOD_LOG_STR = "DepartmentController.%s()";
 
-	@Autowired
-	private CustomLogger log;
+	private final CustomLogger log;
 
-	@Autowired
-	private DepartmentService service;
+	private final DepartmentService service;
 
-	@Autowired
-	private RequestId requestId;
+	private final RequestId requestId;
+
+	public DepartmentController(final CustomLogger log, final DepartmentService service, final RequestId requestId) {
+		super();
+		this.log = log;
+		this.service = service;
+		this.requestId = requestId;
+	}
 
 	@PostMapping
 	public ResponseEntity<ResponseDTO> addDepartment(
 			@Validated(value = Create.class) @RequestBody(required = true) DepartmentInputDTO departmentInput,
-			BindingResult bindingResult) {
+			BindingResult bindingResult) throws Exception {
 		log.info(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("departmentInput", departmentInput));
 
 		if (bindingResult.hasErrors()) {
@@ -58,7 +61,6 @@ public class DepartmentController {
 			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
-//		return null;
 		return service.addDepartment(departmentInput);
 	}
 

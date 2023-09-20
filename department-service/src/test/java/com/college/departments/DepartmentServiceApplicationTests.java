@@ -1,13 +1,28 @@
 package com.college.departments;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+/*************** Unit test for @DepartmentServiceApplication *****************/
+
 class DepartmentServiceApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void main_should_start_app() {
+		try (MockedStatic<SpringApplication> mockedSpringApp = mockStatic(SpringApplication.class)) {
+
+			mockedSpringApp.when(() -> SpringApplication.run(DepartmentServiceApplication.class))
+					.thenReturn(mock(ConfigurableApplicationContext.class));
+
+			DepartmentServiceApplication.main(new String[] {});
+
+			mockedSpringApp.verify(() -> SpringApplication.run(DepartmentServiceApplication.class));
+		}
 	}
 
 }

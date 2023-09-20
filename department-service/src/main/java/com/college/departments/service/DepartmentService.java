@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,11 +27,13 @@ import com.college.departments.dto.SuccessMessageResponseDTO;
 import com.college.departments.entity.Department;
 import com.college.departments.enums.Departments;
 import com.college.departments.repository.DepartmentRepository;
+import com.college.departments.temp.Temp;
 import com.college.departments.utils.CommonUtil;
 import com.college.departments.utils.CustomLogger;
 import com.college.departments.utils.EntityUtil;
 import com.college.departments.utils.ErrorCodeMessage;
 import com.college.departments.utils.RequestId;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Service
@@ -40,20 +41,32 @@ public class DepartmentService {
 
 	private static final String METHOD_LOG_STR = "DepartmentService.%s()";
 
-	@Autowired
-	private ConverterConfig converterConfig;
+	private final ConverterConfig converterConfig;
 
-	@Autowired
-	private DepartmentDAO dao;
+	private final DepartmentDAO dao;
 
-	@Autowired
-	private DepartmentRepository departmentRepository;
+	private final DepartmentRepository departmentRepository;
 
-	@Autowired
-	private CustomLogger log;
+	private final CustomLogger log;
 
-	@Autowired
-	private RequestId requestId;
+	private final RequestId requestId;
+
+	private final ObjectMapper objectMapper;
+
+	private final Temp temp;
+
+	public DepartmentService(final ConverterConfig converterConfig, final DepartmentDAO dao,
+			final DepartmentRepository departmentRepository, final CustomLogger log, final RequestId requestId,
+			final ObjectMapper objectMapper, final Temp temp) {
+		super();
+		this.converterConfig = converterConfig;
+		this.dao = dao;
+		this.departmentRepository = departmentRepository;
+		this.log = log;
+		this.requestId = requestId;
+		this.objectMapper = objectMapper;
+		this.temp = temp;
+	}
 
 	public ResponseEntity<ResponseDTO> addDepartment(DepartmentInputDTO departmentInput) {
 
@@ -68,6 +81,20 @@ public class DepartmentService {
 			log.debug(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("responseDTO", responseDTO));
 			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
+
+		// ----------------------------- testing method stub
+		ObjectNode input = objectMapper.convertValue(departmentInput, ObjectNode.class);
+		try {
+			System.out.println("temp.testNode(12) = " + temp.testNode(12));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			System.out.println("temp.testNode(input) = " + temp.testNode(input));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		// -----------------------------
 
 		Department savedDepart = dao.addDepartment(departmentInput);
 
