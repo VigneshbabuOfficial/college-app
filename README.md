@@ -22,20 +22,6 @@
 > 
 > spring cache
 ---------------------------------------
-> microservices
-> 
-> pomparent after 2 services
-> 
-> @Slf4j - log management- separate log ( any one of the services )
-> 
-> openapi
-> 
-> flywayDB
-> 
-> apigateway
-> 
-> kafka
----------------------------------------
 > authentication & authorization  ( max session = 1 )
 > 
 > own user account
@@ -50,6 +36,23 @@
 > 
 > webhooks
 ---------------------------------------
+> microservices
+> 
+> openapi
+> 
+> flywayDB
+> 
+> pomparent after 2 services
+> 
+> @Slf4j - log management- separate log ( any one of the services )
+>
+> ELK
+>  
+> apigateway
+> 
+> kafka
+---------------------------------------
+
 > deployment
 > 
 > Github pipeline
