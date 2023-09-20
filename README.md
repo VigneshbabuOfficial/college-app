@@ -8,19 +8,19 @@
 
 
 ### phase-1
-> wildfly = DONE
+> DONE = wildfly 
 > 
-> postgres ( DONE ) + mysql
+> DONE = postgres + mysql
 > 
-> java.util.logging - log management- separate log = DONE
+> DONE = java.util.logging - log management- separate log
 > 
-> filter, sort & pagination params = DONE
+> DONE = filter, sort & pagination params
 > 
-> springboot crud = DONE
+> DONE = springboot crud
 > 
-> mockito test case = in progress
+> in progress = mockito test case
 > 
-> spring cache 
+> spring cache
 ---------------------------------------
 > microservices
 > 
