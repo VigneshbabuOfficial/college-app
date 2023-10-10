@@ -52,7 +52,7 @@ public class DepartmentController {
 	@PostMapping
 	public ResponseEntity<ResponseDTO> addDepartment(
 			@Validated(value = Create.class) @RequestBody(required = true) DepartmentInputDTO departmentInput,
-			BindingResult bindingResult) throws Exception {
+			BindingResult bindingResult) {
 		log.info(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("departmentInput", departmentInput));
 
 		if (bindingResult.hasErrors()) {

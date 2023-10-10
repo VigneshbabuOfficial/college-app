@@ -71,3 +71,6 @@ target/
 
 _sgbak/
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
+
+#idea folder
+.idea/

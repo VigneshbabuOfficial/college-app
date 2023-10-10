@@ -8,7 +8,9 @@ import org.mockito.MockedStatic;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-/*************** Unit test for @DepartmentServiceApplication *****************/
+/***************
+ * Unit test for @Lnk DepartmentServiceApplication
+ *****************/
 
 class DepartmentServiceApplicationTests {
 
