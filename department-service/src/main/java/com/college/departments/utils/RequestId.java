@@ -1,9 +1,12 @@
 package com.college.departments.utils;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
 
-public class RequestId {
+public class RequestId implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String id;
 

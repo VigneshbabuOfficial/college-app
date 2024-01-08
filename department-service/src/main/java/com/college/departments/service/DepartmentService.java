@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.Tuple;
 
@@ -99,7 +98,7 @@ public class DepartmentService {
 		Department savedDepart = dao.addDepartment(departmentInput);
 
 		ResponseDTO responseDTO = SuccessDataResponseDTO.builder()
-				.data(Arrays.asList(converterConfig.converter(savedDepart, DepartmentResponseDTO.class))).build();
+				.data(converterConfig.converterList(savedDepart, DepartmentResponseDTO.class)).build();
 
 		log.debug(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("responseDTO", responseDTO));
 
@@ -224,19 +223,19 @@ public class DepartmentService {
 		return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 	}
 
-	public ResponseEntity<ResponseDTO> deleteDepartments(List<Long> ids) {
+	public ResponseEntity<ResponseDTO> deleteDepartments(final List<Long> ids) {
 
 		log.info(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("ids", ids));
 
 		// validating ids
 		List<Department> departments = dao.findAllByIds(ids);
 
-		List<Long> dbIds = departments.stream().map(Department::getId).collect(Collectors.toList());
+		List<Long> dbIds = departments.stream().map(Department::getId).toList();
 
-		List<Long> invalidIds = ids;
+		List<Long> invalidIds = new ArrayList<Long>(ids);
 		invalidIds.removeAll(dbIds);
 
-		if (invalidIds.size() > 0) {
+		if (!invalidIds.isEmpty()) {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
 					"Department(s) doesn't exists", requestId.getId());
 			log.debug(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("responseDTO", responseDTO)

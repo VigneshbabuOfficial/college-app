@@ -27,10 +27,12 @@ import com.college.departments.dto.Update;
 import com.college.departments.service.DepartmentService;
 import com.college.departments.utils.CommonUtil;
 import com.college.departments.utils.CustomLogger;
+import com.college.departments.utils.EndPointConstants;
+import com.college.departments.utils.LoggingKeys;
 import com.college.departments.utils.RequestId;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping(EndPointConstants.DEPARTMENTS)
 @Validated
 public class DepartmentController {
 
@@ -38,11 +40,11 @@ public class DepartmentController {
 
 	private final CustomLogger log;
 
-	private final DepartmentService service;
-
 	private final RequestId requestId;
 
-	public DepartmentController(final CustomLogger log, final DepartmentService service, final RequestId requestId) {
+	private final DepartmentService service;
+
+	public DepartmentController(CustomLogger log, final DepartmentService service, final RequestId requestId) {
 		super();
 		this.log = log;
 		this.service = service;
@@ -51,21 +53,29 @@ public class DepartmentController {
 
 	@PostMapping
 	public ResponseEntity<ResponseDTO> addDepartment(
-			@Validated(value = Create.class) @RequestBody(required = true) DepartmentInputDTO departmentInput,
+			@Validated(value = Create.class) @RequestBody(required = true) final DepartmentInputDTO departmentInput,
 			BindingResult bindingResult) {
-		log.info(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("departmentInput", departmentInput));
+		log.info(String.format(METHOD_LOG_STR, "addDepartment")
+				+ logKeyValue(LoggingKeys.DEPARTMENT_INPUT, departmentInput));
 
 		if (bindingResult.hasErrors()) {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildBindingResultErrors(bindingResult, requestId.getId());
-			log.error(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("responseDTO", responseDTO));
+			log.error(String.format(METHOD_LOG_STR, "addDepartment")
+					+ logKeyValue(LoggingKeys.RESPONSE_DTO, responseDTO));
 			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
 		return service.addDepartment(departmentInput);
 	}
 
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<ResponseDTO> getDepartmentById(@PathVariable Long id) {
+	@DeleteMapping(path = EndPointConstants.IDS)
+	public ResponseEntity<ResponseDTO> deleteDepartments(@PathVariable final List<Long> ids) {
+		log.info(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("ids", ids));
+		return service.deleteDepartments(ids);
+	}
+
+	@GetMapping(path = EndPointConstants.ID)
+	public ResponseEntity<ResponseDTO> getDepartmentById(@PathVariable final Long id) {
 		log.info(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("id", id));
 		return service.getDepartmentById(id);
 	}
@@ -91,18 +101,12 @@ public class DepartmentController {
 		return service.getDepartments(filterParams, orFilterParams, sortParams, page, limit, fields);
 	}
 
-	@PutMapping(path = "/{id}")
+	@PutMapping(path = EndPointConstants.ID)
 	public ResponseEntity<ResponseDTO> updateDepartment(@PathVariable Long id,
 			@Validated(value = Update.class) @RequestBody(required = true) DepartmentInputDTO departmentInput) {
 		log.info(String.format(METHOD_LOG_STR, "updateDepartment") + logKeyValue("id", id)
 				+ logKeyValue("departmentInput", departmentInput));
 		return service.updateDepartment(id, departmentInput);
-	}
-
-	@DeleteMapping(path = "/{ids}")
-	public ResponseEntity<ResponseDTO> deleteDepartments(@PathVariable List<Long> ids) {
-		log.info(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("ids", ids));
-		return service.deleteDepartments(ids);
 	}
 
 }

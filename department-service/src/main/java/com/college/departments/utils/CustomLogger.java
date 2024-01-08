@@ -20,10 +20,9 @@ public class CustomLogger implements Serializable {
 		super();
 	}
 
-	public CustomLogger(Logger logger) {
-		super();
-		this.logger = logger;
-	}
+	/*
+	 * public CustomLogger(Logger logger) { super(); this.logger = logger; }
+	 */
 
 	public static CustomLogger getLogger(String siteName) {
 

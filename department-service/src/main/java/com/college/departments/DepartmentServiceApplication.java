@@ -19,7 +19,7 @@ public class DepartmentServiceApplication {
 	}
 
 	@Bean
-	public ObjectMapper objectMapper() {
+	ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 
 		// to support optional feature
@@ -30,12 +30,12 @@ public class DepartmentServiceApplication {
 
 	@Bean
 	@RequestScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-	public RequestId requestId() {
+	RequestId requestId() {
 		return new RequestId();
 	}
 
 	@Bean
-	public CustomLogger logger() {
+	CustomLogger logger() {
 		return CustomLogger.getLogger("department-service");
 	}
 

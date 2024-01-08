@@ -1,5 +1,8 @@
 package com.college.departments.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +19,12 @@ public class ConverterConfig {
 
 		return objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).convertValue(source,
 				target);
+	}
+
+	public <T> List<Object> converterList(Object source, Class<?> target) {
+
+		return Arrays.asList(objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+				.convertValue(source, target));
 	}
 
 }

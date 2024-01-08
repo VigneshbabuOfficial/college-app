@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/app-status")
-public class AppStatusController {
+class AppStatusController {
 
 	@GetMapping
-	public String getAppStatus() {
-		return "Success !!! College Students Department service is ready to access.";
+	String getAppStatus() {
+		return "Success !!! Department service is ready to access.";
 	}
 }

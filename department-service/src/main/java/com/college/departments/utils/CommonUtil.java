@@ -12,6 +12,10 @@ import com.college.departments.dto.ErrorResponsesDTO;
 
 public class CommonUtil {
 
+	private CommonUtil() {
+		super();
+	}
+
 	public static ErrorResponsesDTO buildBindingResultErrors(BindingResult bindingResult, String requestId) {
 
 		List<ErrorResponseDTO> errors = new ArrayList<>();
