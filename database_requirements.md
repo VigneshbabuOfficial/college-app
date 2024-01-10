@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS public.department
 
 
 ```SQL
+
 CREATE SEQUENCE IF NOT EXISTS public.student_seq
     INCREMENT 1
     START 1
@@ -67,10 +68,10 @@ CREATE TABLE IF NOT EXISTS public.student
     father_name character varying(255),
     address character varying(255),
     adhaar_num BIGINT,
-    dob timestamp without time zone,
+    dob DATE,
     contact_num character varying(255),
     email character varying(255),
-    photo BLOB,
+    profile_pic BYTEA,
     comments character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -82,6 +83,7 @@ CREATE TABLE IF NOT EXISTS public.student
 	
 --ALTER TABLE public.student ADD CONSTRAINT unique_email UNIQUE (email);
 --ALTER TABLE public.student ADD CONSTRAINT unique_adhaar_num UNIQUE (adhaar_num);
+
 ```
 
 
