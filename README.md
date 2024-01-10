@@ -115,7 +115,7 @@ adhaar_num
 dob
 contact_num
 email
-photo
+profile_pic
 comments
 created_at
 updated_at
