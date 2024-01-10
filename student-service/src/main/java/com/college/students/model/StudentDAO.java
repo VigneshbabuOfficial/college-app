@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.college.students.utils.Constants;
 import com.college.students.utils.CustomLogger;
 import com.college.students.utils.EntityUtil;
 
@@ -41,14 +42,13 @@ public class StudentDAO {
 
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public Long getStudents(List<Student> dataList, List<Tuple> tupleDataList, String[] filterParams,
-			String[] orFilterParams, String[] sortParams, int offset, int limit, String[] fields) {
+	public Long getStudents(List<Student> dataList, List<Tuple> tupleDataList, String[] filter, String[] orFilter,
+			String[] sort, int offset, int limit, String[] fields) {
 
-		log.info(String.format(METHOD_LOG_STR, "getDepartments")
-				+ logKeyValue("filterParams", Arrays.toString(filterParams))
-				+ logKeyValue("orFilterParams", Arrays.toString(orFilterParams))
-				+ logKeyValue("sortParams", Arrays.toString(sortParams)) + logKeyValue("offset", offset)
-				+ logKeyValue("limit", limit) + logKeyValue("fields", Arrays.toString(fields)));
+		log.info(String.format(METHOD_LOG_STR, "getStudents") + logKeyValue(Constants.FILTER, Arrays.toString(filter))
+				+ logKeyValue(Constants.OR_FILTER, Arrays.toString(orFilter))
+				+ logKeyValue(Constants.SORT, Arrays.toString(sort)) + logKeyValue(Constants.OFFSET, offset)
+				+ logKeyValue(Constants.LIMIT, limit) + logKeyValue(Constants.FIELDS, Arrays.toString(fields)));
 
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaBuilder countCriteriaBuilder = entityManager.getCriteriaBuilder();
@@ -80,29 +80,29 @@ public class StudentDAO {
 
 		}
 
-		if (filterParams != null) {
-			for (String filter : filterParams) {
-				predicates.add(EntityUtil.getPredicate(criteriaBuilder, dataListRoot, filter));
-				countPredicates.add(EntityUtil.getPredicate(countCriteriaBuilder, countdataListRoot, filter));
+		if (filter != null) {
+			for (String filterObj : filter) {
+				predicates.add(EntityUtil.getPredicate(criteriaBuilder, dataListRoot, filterObj));
+				countPredicates.add(EntityUtil.getPredicate(countCriteriaBuilder, countdataListRoot, filterObj));
 			}
 		}
 
-		if (orFilterParams != null) {
+		if (orFilter != null) {
 			List<Predicate> orPredicates = new ArrayList<>();
 			List<Predicate> countORPredicates = new ArrayList<>();
-			for (String filter : orFilterParams) {
-				orPredicates.add(EntityUtil.getPredicate(criteriaBuilder, dataListRoot, filter));
-				countORPredicates.add(EntityUtil.getPredicate(countCriteriaBuilder, countdataListRoot, filter));
+			for (String filterObj : orFilter) {
+				orPredicates.add(EntityUtil.getPredicate(criteriaBuilder, dataListRoot, filterObj));
+				countORPredicates.add(EntityUtil.getPredicate(countCriteriaBuilder, countdataListRoot, filterObj));
 			}
 			predicates.add(criteriaBuilder.or(orPredicates.toArray(new Predicate[0])));
 			countPredicates.add(countCriteriaBuilder.or(countORPredicates.toArray(new Predicate[0])));
 		}
 
-		if (sortParams != null) {
+		if (sort != null) {
 
 			List<Order> orderList = new ArrayList<>();
 
-			for (String sortParam : sortParams) {
+			for (String sortParam : sort) {
 				orderList.add(EntityUtil.getOrderbyPredicate(criteriaBuilder, dataListRoot, sortParam));
 			}
 			criteriaQuery.orderBy(orderList);

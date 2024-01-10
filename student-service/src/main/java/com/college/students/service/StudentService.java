@@ -19,6 +19,7 @@ import com.college.students.model.Student;
 import com.college.students.model.StudentDAO;
 import com.college.students.model.StudentRepository;
 import com.college.students.utils.CommonUtil;
+import com.college.students.utils.Constants;
 import com.college.students.utils.CustomLogger;
 import com.college.students.utils.EntityUtil;
 import com.college.students.utils.ErrorCodeMessage;
@@ -55,14 +56,13 @@ public class StudentService {
 		this.studentDAO = studentDAO;
 	}
 
-	public ResponseEntity<ResponseDTO> getStudents(String[] filterParams, String[] orFilterParams, String[] sortParams,
-			int page, int limit, String[] fields) {
+	public ResponseEntity<ResponseDTO> getStudents(String[] filter, String[] orFilter, String[] sort, int page,
+			int limit, String[] fields) {
 
-		log.info(String.format(METHOD_LOG_STR, "getDepartments")
-				+ logKeyValue("filterParams", Arrays.toString(filterParams))
-				+ logKeyValue("orFilterParams", Arrays.toString(orFilterParams))
-				+ logKeyValue("sortParams", Arrays.toString(sortParams)) + logKeyValue("page", page)
-				+ logKeyValue("limit", limit) + logKeyValue("fields", Arrays.toString(fields)));
+		log.info(String.format(METHOD_LOG_STR, "getStudents") + logKeyValue(Constants.FILTER, Arrays.toString(filter))
+				+ logKeyValue(Constants.OR_FILTER, Arrays.toString(orFilter))
+				+ logKeyValue(Constants.SORT, Arrays.toString(sort)) + logKeyValue(Constants.PAGE, page)
+				+ logKeyValue(Constants.LIMIT, limit) + logKeyValue(Constants.FIELDS, Arrays.toString(fields)));
 
 		List<ObjectNode> dataListNode = new ArrayList<>();
 		List<Student> studentList = new ArrayList<>();
@@ -75,14 +75,13 @@ public class StudentService {
 		ResponseDTO responseDTO = null;
 
 		try {
-			total = studentDAO.getStudents(studentList, tupleDataList, filterParams, orFilterParams, sortParams, offset,
-					limit, fields);
+			total = studentDAO.getStudents(studentList, tupleDataList, filter, orFilter, sort, offset, limit, fields);
 		} catch (Exception e) {
 			responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INTERNAL_SERVER_ERROR,
 					ErrorCodeMessage.FAILED_TO_FETCH_RESOURCE_MSG, requestId.getId());
 
-			log.error(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue("exception", e.getMessage())
-					+ logKeyValue("responseDTO", responseDTO));
+			log.error(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue(Constants.EXCEPTION, e.getMessage())
+					+ logKeyValue(Constants.RESPONSE_DTO, responseDTO));
 			return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -102,7 +101,7 @@ public class StudentService {
 					.currentPageTotal(studentList.size()).build();
 		}
 
-		log.debug(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue("responseDTO", responseDTO));
+		log.debug(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
 
 		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 	}
