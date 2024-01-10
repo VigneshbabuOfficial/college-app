@@ -1,14 +1,11 @@
-package com.college.departments.dao;
+package com.college.students.model;
 
-import static com.college.departments.utils.CustomLogger.logKeyValue;
+import static com.college.students.utils.CustomLogger.logKeyValue;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,21 +19,16 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.college.departments.dto.DepartmentInputDTO;
-import com.college.departments.entity.Department;
-import com.college.departments.enums.Departments;
-import com.college.departments.repository.DepartmentRepository;
-import com.college.departments.utils.CustomLogger;
-import com.college.departments.utils.EntityUtil;
+import com.college.students.utils.CustomLogger;
+import com.college.students.utils.EntityUtil;
 
 @Repository
-public class DepartmentDAO {
+public class StudentDAO {
 
-	private static final String METHOD_LOG_STR = "DepartmentDAO.%s()";
+	private static final String METHOD_LOG_STR = "StudentDAO.%s()";
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -45,32 +37,11 @@ public class DepartmentDAO {
 	private CustomLogger log;
 
 	@Autowired
-	private DepartmentRepository repository;
-
-	public Department addDepartment(DepartmentInputDTO departmentInput) {
-
-		log.debug("method = addDepartment, departmentInput = " + departmentInput);
-
-		Department newDepartment = Department.builder().name(Departments.valueOf(departmentInput.getName().get()))
-				.comments(departmentInput.getComments().get())
-				.createdAt(LocalDateTime.now(ZoneId.of("UTC")).withNano(0)).build();
-
-		return repository.save(newDepartment);
-	}
-
-	public Optional<Department> findById(Long id) {
-
-		return repository.findById(id);
-	}
-
-	public List<Department> getDepartments() {
-
-		return repository.findAll();
-	}
+	private StudentRepository repository;
 
 	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
-	public Long getDepartments(List<Department> dataList, List<Tuple> tupleDataList, String[] filterParams,
+	public Long getStudents(List<Student> dataList, List<Tuple> tupleDataList, String[] filterParams,
 			String[] orFilterParams, String[] sortParams, int offset, int limit, String[] fields) {
 
 		log.info(String.format(METHOD_LOG_STR, "getDepartments")
@@ -86,13 +57,13 @@ public class DepartmentDAO {
 		if (fields != null && fields.length > 0) {
 			criteriaQuery = criteriaBuilder.createQuery(Tuple.class);
 		} else {
-			criteriaQuery = criteriaBuilder.createQuery(Department.class);
+			criteriaQuery = criteriaBuilder.createQuery(Student.class);
 		}
 
 		CriteriaQuery<Long> countCriteriaQuery = countCriteriaBuilder.createQuery(Long.class);
 
-		Root<Department> dataListRoot = criteriaQuery.from(Department.class);
-		Root<Department> countdataListRoot = countCriteriaQuery.from(Department.class);
+		Root<Student> dataListRoot = criteriaQuery.from(Student.class);
+		Root<Student> countdataListRoot = countCriteriaQuery.from(Student.class);
 
 		List<Predicate> predicates = new ArrayList<>();
 		List<Predicate> countPredicates = new ArrayList<>();
@@ -146,7 +117,7 @@ public class DepartmentDAO {
 
 		} else {
 
-			dataList.addAll((Collection<? extends Department>) entityManager.createQuery(criteriaQuery)
+			dataList.addAll((Collection<? extends Student>) entityManager.createQuery(criteriaQuery)
 					.setMaxResults(limit).setFirstResult(offset).getResultList());
 
 		}
@@ -155,25 +126,6 @@ public class DepartmentDAO {
 		countCriteriaQuery.where(countPredicates.toArray(new Predicate[countPredicates.size()]));
 
 		return entityManager.createQuery(countCriteriaQuery).getSingleResult();
-	}
-
-	public Optional<Department> isDepartmentExist(Departments name, Long id) {
-		log.info(
-				String.format(METHOD_LOG_STR, "isDepartmentExist") + logKeyValue("name", name) + logKeyValue("id", id));
-		if (id == null) {
-			return repository.findOne(Example.of(Department.builder().name(name).build()));
-		} else {
-			return repository.findByNameAndIdNot(name, id);
-		}
-	}
-
-	public List<Department> findAllByIds(List<Long> ids) {
-		log.info(String.format(METHOD_LOG_STR, "findAllByIds") + logKeyValue("ids", ids));
-		return repository.findAllById(ids);
-	}
-
-	public void deleteDepartments(List<Department> departments) {
-		repository.deleteAll(departments);
 	}
 
 }
