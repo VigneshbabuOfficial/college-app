@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS public.student
     name character varying(255),
     father_name character varying(255),
     address character varying(255),
-    adhaar_num BIGINT
+    adhaar_num BIGINT,
     dob timestamp without time zone,
     contact_num character varying(255),
     email character varying(255),
