@@ -4,6 +4,9 @@ PROJECT PLAN
 >
 > Student should log into the application and session can be maintained in the Student service. From the Student service using M2M token all other services Accounts, Attendance, Exams and Fee service should be communicated based on the Student ID.
 
+
+<img width="755" alt="image" src="https://github.com/VigneshbabuOfficial/college-app/assets/70185865/1484a11d-5643-4a1b-a23c-08d88addccce">
+
 -----------------------------------------
 
 > - [x] Implementation of Service 1 ( Department Service )
