@@ -2,7 +2,7 @@ PROJECT PLAN
 
 > - [x] Implementation of Service 1 ( Department Service )
 >
-> - [ ] Implementation of Service 2 ( STUDENT SERVICE )
+> - [x] Implementation of Service 2 ( STUDENT SERVICE )
 > 
 > - [ ] Implementation of Microservice Architecture.
 > 
