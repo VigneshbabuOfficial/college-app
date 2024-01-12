@@ -4,7 +4,7 @@ PROJECT PLAN
 >
 > - [x] Implementation of Service 2 ( STUDENT SERVICE )
 > 
-> - [ ] Implementation of Microservice Architecture.
+> - [ ] Implementation of Microservice Architecture ( Account, Exam, Attendance, Fee services should be invoked from student service only. like student/accounts , student/exam .... )
 > 
 > - [ ] Implementation of Basic JWT Authentication.
 > 
