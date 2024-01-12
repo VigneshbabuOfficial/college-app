@@ -23,6 +23,7 @@ import com.college.students.dto.ResponseDTO;
 import com.college.students.dto.StudentInputDTO;
 import com.college.students.dto.StudentResponseDTO;
 import com.college.students.dto.SuccessDataResponseDTO;
+import com.college.students.dto.SuccessMessageResponseDTO;
 import com.college.students.model.Student;
 import com.college.students.model.StudentDAO;
 import com.college.students.model.StudentRepository;
@@ -227,6 +228,69 @@ public class StudentService {
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(image);
+	}
+
+	public ResponseEntity<ResponseDTO> updateStudent(Long studentId, StudentInputDTO studentInput) {
+
+		log.info(String.format(METHOD_LOG_STR, "updateStudent") + logKeyValue(Constants.STUDENT_ID, studentId)
+				+ logKeyValue(Constants.STUDENT_INPUT, studentInput));
+
+		Optional<Student> studentOpt = studentDAO.findById(studentId);
+
+		if (studentOpt.isEmpty()) {
+			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
+					ErrorCodeMessage.STUDENT_DOES_NOT_EXIST, requestId.getId());
+			log.error(
+					String.format(METHOD_LOG_STR, "updateStudent") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+			return new ResponseEntity<>(responseDTO, HttpStatus.NOT_FOUND);
+		}
+
+		// adhaar & email validation
+		if (studentInput.getAdhaarNum().isPresent() || studentInput.getEmail().isPresent()) {
+
+			Optional<Student> studentOptional = studentDAO.isStudentExist(studentId, studentInput);
+
+			if (studentOptional.isPresent()) {
+				String duplicateField = studentOptional.get().getAdhaarNum()
+						.equals(Long.valueOf(studentInput.getAdhaarNum().get())) ? "Adhaar Number" : "Email";
+				ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
+						duplicateField + " already exists", requestId.getId());
+				log.debug(String.format(METHOD_LOG_STR, "updateStudent")
+						+ logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+				return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		Student studentSaved = studentDAO.updateStudent(studentOpt.get(), studentInput);
+
+		ResponseDTO responseDTO = SuccessDataResponseDTO.builder()
+				.data(converterConfig.convertToList(studentSaved, StudentResponseDTO.class)).build();
+
+		log.debug(String.format(METHOD_LOG_STR, "updateStudent") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+
+		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+	}
+
+	public ResponseEntity<ResponseDTO> deleteStudent(Long studentId) {
+		log.info(String.format(METHOD_LOG_STR, "deleteStudent") + logKeyValue(Constants.STUDENT_ID, studentId));
+
+		Optional<Student> studentOpt = studentDAO.findById(studentId);
+
+		if (studentOpt.isEmpty()) {
+			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
+					ErrorCodeMessage.STUDENT_DOES_NOT_EXIST, requestId.getId());
+			log.error(
+					String.format(METHOD_LOG_STR, "deleteStudent") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+			return new ResponseEntity<>(responseDTO, HttpStatus.NOT_FOUND);
+		}
+
+		repository.delete(studentOpt.get());
+
+		ResponseDTO responseDTO = SuccessMessageResponseDTO.builder().message("Deleted Successfully").build();
+
+		log.debug(String.format(METHOD_LOG_STR, "deleteStudent") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+
+		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 	}
 
 }

@@ -9,9 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +24,7 @@ import com.college.students.dto.Create;
 import com.college.students.dto.ErrorResponsesDTO;
 import com.college.students.dto.ResponseDTO;
 import com.college.students.dto.StudentInputDTO;
+import com.college.students.dto.Update;
 import com.college.students.service.StudentService;
 import com.college.students.utils.CommonUtil;
 import com.college.students.utils.Constants;
@@ -106,6 +109,30 @@ public class StudentController {
 
 		return studentService.addStudent(studentInput);
 
+	}
+
+	@PutMapping(path = EndPointConstants.ID)
+	public ResponseEntity<ResponseDTO> updateStudent(@PathVariable(name = Constants.ID) Long studentId,
+			@Validated(Update.class) @RequestBody(required = true) StudentInputDTO studentInput,
+			BindingResult bindingResult) {
+
+		log.info(String.format(METHOD_LOG_STR, "updateStudent") + logKeyValue(Constants.STUDENT_ID, studentId)
+				+ logKeyValue(Constants.STUDENT_INPUT, studentInput));
+
+		if (bindingResult.hasErrors()) {
+			ErrorResponsesDTO responseDTO = CommonUtil.buildBindingResultErrors(bindingResult, requestId.getId());
+			log.error(
+					String.format(METHOD_LOG_STR, "updateStudent") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+		}
+
+		return studentService.updateStudent(studentId, studentInput);
+	}
+
+	@DeleteMapping(path = EndPointConstants.ID)
+	public ResponseEntity<ResponseDTO> deleteStudent(@PathVariable(name = Constants.ID) Long studentId) {
+		log.info(String.format(METHOD_LOG_STR, "deleteStudent") + logKeyValue(Constants.STUDENT_ID, studentId));
+		return studentService.deleteStudent(studentId);
 	}
 
 }

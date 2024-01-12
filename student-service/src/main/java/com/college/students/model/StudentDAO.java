@@ -138,20 +138,77 @@ public class StudentDAO {
 	}
 
 	public Optional<Student> isStudentExist(StudentInputDTO studentInput) {
-		return repository.findByAdhaarNumOrEmail(Long.valueOf(studentInput.getAdhaarNum().get()),
+		return repository.findFirstByAdhaarNumOrEmail(Long.valueOf(studentInput.getAdhaarNum().get()),
 				studentInput.getEmail().get());
 	}
 
 	public Student addStudent(StudentInputDTO studentInput) {
 
-		Student newStudent = Student.builder().name(studentInput.getName().get())
-				.fatherName(studentInput.getFatherName().get()).address(studentInput.getAddress().get())
+		// @formatter:off
+		Student newStudent = Student.builder()
+				.name(studentInput.getName().get())
+				.fatherName(studentInput.getFatherName().get())
+				.address(studentInput.getAddress().get())
 				.adhaarNum(Long.valueOf(studentInput.getAdhaarNum().get()))
-				.dob(LocalDate.parse(studentInput.getDob().get())).contactNum(studentInput.getContactNum().get())
-				.email(studentInput.getEmail().get()).comments(studentInput.getComments())
-				.createdAt(LocalDateTime.now(ZoneId.of("UTC")).withNano(0)).build();
+				.dob(LocalDate.parse(studentInput.getDob().get()))
+				.contactNum(studentInput.getContactNum().get())
+				.email(studentInput.getEmail().get())
+				.comments(Optional.ofNullable(studentInput.getComments()).isPresent() ? studentInput.getComments().get() : null)
+				.createdAt(LocalDateTime.now(ZoneId.of("UTC")).withNano(0))
+				.build();
+		// @formatter:on
 
 		return repository.save(newStudent);
+	}
+
+	public Optional<Student> isStudentExist(Long studentId, StudentInputDTO studentInput) {
+		if (studentInput.getAdhaarNum().isPresent() && studentInput.getEmail().isPresent()) {
+			return repository.findFirstByAdhaarNumOrEmailAndIdNot(Long.valueOf(studentInput.getAdhaarNum().get()),
+					studentInput.getEmail().get(), studentId);
+		} else if (studentInput.getAdhaarNum().isPresent()) {
+			return repository.findFirstByAdhaarNumAndIdNot(Long.valueOf(studentInput.getAdhaarNum().get()), studentId);
+		} else {
+			return repository.findFirstByEmailAndIdNot(studentInput.getEmail().get(), studentId);
+		}
+	}
+
+	public Student updateStudent(Student student, StudentInputDTO studentInput) {
+
+		if (Optional.ofNullable(studentInput.getName()).isPresent()) {
+			student.setName(studentInput.getName().get());
+		}
+
+		if (Optional.ofNullable(studentInput.getFatherName()).isPresent()) {
+			student.setFatherName(studentInput.getFatherName().get());
+		}
+
+		if (Optional.ofNullable(studentInput.getAddress()).isPresent()) {
+			student.setAddress(studentInput.getAddress().get());
+		}
+
+		if (Optional.ofNullable(studentInput.getAdhaarNum()).isPresent()) {
+			student.setAdhaarNum(Long.valueOf(studentInput.getAdhaarNum().get()));
+		}
+
+		if (Optional.ofNullable(studentInput.getDob()).isPresent()) {
+			student.setDob(LocalDate.parse(studentInput.getDob().get()));
+		}
+
+		if (Optional.ofNullable(studentInput.getContactNum()).isPresent()) {
+			student.setContactNum(studentInput.getContactNum().get());
+		}
+
+		if (Optional.ofNullable(studentInput.getEmail()).isPresent()) {
+			student.setEmail(studentInput.getEmail().get());
+		}
+
+		if (Optional.ofNullable(studentInput.getComments()).isPresent()) {
+			student.setComments(studentInput.getComments().get());
+		}
+
+		student.setUpdatedAt(LocalDateTime.now(ZoneId.of("UTC")).withNano(0));
+
+		return repository.save(student);
 	}
 
 }

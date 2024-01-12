@@ -57,6 +57,6 @@ public class StudentInputDTO implements Serializable {
 	private Optional<@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Flag.CASE_INSENSITIVE, message = ErrorCodeMessage.SORRY_INVALID_EMAIL_MSG, groups = {
 			Create.class, Update.class }) String> email;
 
-	private String comments;
+	private Optional<String> comments;
 
 }

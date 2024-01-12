@@ -38,3 +38,10 @@ spring:
 #     jdbc: 
 #     lob:
 #        '[non_contextual_creation]': true
+
+
+#log props
+logging:
+  level:
+    root: info
+    com.college.students: debug
