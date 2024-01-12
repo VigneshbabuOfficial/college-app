@@ -12,9 +12,13 @@ PROJECT PLAN
 > - [x] Implementation of Service 1 ( Department Service )
 >
 > - [x] Implementation of Service 2 ( STUDENT SERVICE )
+>
+> - [ ] Implementation of Service 3 ( FACULTY SERVICE )
+>
+> - [ ] Implementation of Service 4 ( ACCOUNT SERVICE )
 > 
-> - [ ] Implementation of Microservice Architecture ( Account, Exam, Attendance, Fee services should be invoked from student service only. like student/accounts , student/exam .... )
-> 
+> - [ ] Implementation of Microservice Architecture for STUDENT SERVICE & ACCOUNT SERVICE & FACULTY SERVICE
+>  
 > - [ ] Implementation of Basic JWT Authentication.
 > 
 > - [ ] Implementation of JWT Authentication with Microservice Arch,.
@@ -26,3 +30,7 @@ PROJECT PLAN
 > - [ ] Implementation of Basic AuthO Authentication.
 > 
 > - [ ] Implementation of AuthO Authentication with Microservice Arch,.
+>
+> - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
+
+
