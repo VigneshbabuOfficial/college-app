@@ -1,5 +1,11 @@
 PROJECT PLAN
 
+> Faculty should log into the application and session can be maintained in the Faculty service. From the Faculty service using M2M token all other services Accounts, Attendance, Exams and Fee service should be communicated.
+>
+> Student should log into the application and session can be maintained in the Student service. From the Student service using M2M token all other services Accounts, Attendance, Exams and Fee service should be communicated based on the Student ID.
+
+-----------------------------------------
+
 > - [x] Implementation of Service 1 ( Department Service )
 >
 > - [x] Implementation of Service 2 ( STUDENT SERVICE )
