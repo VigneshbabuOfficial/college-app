@@ -378,14 +378,61 @@ updated_at
 
 #### api requests, responses and pages design
 ##### login / logout
-##### page-1
-##### page-2
-##### page-3
-##### page-4
 
+>  Teacher View
 
+##### HOME PAGE ( page-1 afer loggedin ) 
+<img width="576" alt="image" src="https://github.com/VigneshbabuOfficial/college-app/assets/70185865/47bd7494-cc68-412d-9f61-03a1c9637fbc">
 
+##### page-2 - Department 
+> showing All the Departments and choosing Department -> choose year of passouts -> listing all the Students as table row ( name, father name, email, contact num ) and hovering over each record should show details with profile pic
 
+##### page-3 - Students 
+> filter ( department , year of pass out ) - listing the students ( by default show the data as recent to old )
+> 
+> if any individual student is clicked then Student View should be shown
+> 
+> Save & Next button to enable Teacher enter the student details
 
+##### page-4 - Accounts 
+> filter ( department , year of pass out ) - listing the student accounts ( by default show the data as recent to old )
+>
+> Save & Next button to enable Teacher enter the student details
+
+##### page-5 - Exams 
+> filter ( department , year of pass out, Semester( 1-8 ), Subject ) - listing the student exam details ( by default show the data as recent to old )
+>
+> Save & Next button to enable Teacher enter the student exam details
+
+##### page-6 - Attendance 
+> filter ( department , year of pass out, Semester( 1-8 ) ) - listing the student attendance details ( by default show the data as recent to old )
+>
+> Save & Next button to enable Teacher enter the student attendance details
+>
+> Take Attendance
+
+##### page-7 - Fee 
+> filter ( department , year of pass out ) - listing the student accounts ( by default show the data as recent to old )
+>
+> Save & Next button to enable Teacher enter the student fee details
+
+##### settings - edit font type & size
+##### logout
+
+-------------------------------- 
+
+> Student View
+##### HOME PAGE ( page-1 afer loggedin )
+> showing the student personal info ( edit & save )
+>
+> profile pic edit in popup
+<img width="576" alt="image" src="https://github.com/VigneshbabuOfficial/college-app/assets/70185865/53b163e6-b549-4200-81a5-cc246b5761eb">
+
+##### page-2 - Accounts - showing current student accounts details ( edit & save )
+##### page-3 - Exams - showing current student exams details ( edit & save )
+##### page-4 - Attendance - showing current student attendance details ( edit & save )
+##### page-5 - Fee - showing current student fee details ( edit & save )
+##### settings - edit font type & size
+##### logout
 
 
