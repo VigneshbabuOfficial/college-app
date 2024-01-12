@@ -9,6 +9,7 @@ public class Constants {
 	public static final String DEFAULT_PAGE_SIZE = "1";
 
 	public static final String FIELDS = "fields";
+	public static final String FILE_NAME = "file_name";
 	public static final String FILTER = "filter";
 
 	public static final String EMPTY_STR = "";
@@ -18,7 +19,9 @@ public class Constants {
 	public static final String GREATER_THAN = ">";
 	public static final String GRETER_THAN_OR_EQUAL_TO = ">=";
 
+	public static final String ID = "id";
 	public static final String ILIKE = "ILIKE";
+	public static final String IMAGE = "image";
 	public static final String IN = "IN";
 
 	public static final String LESS_THAN = "<";
@@ -40,6 +43,8 @@ public class Constants {
 	public static final String RESPONSE_DTO = "responseDTO";
 
 	public static final String SORT = "sort";
+	public static final String STUDENT_INPUT = "STUDENT_INPUT";
+	public static final String STUDENT_ID = "studentId";
 
 	public static final String YYYY_MM_DD = "yyyy-MM-dd";
 

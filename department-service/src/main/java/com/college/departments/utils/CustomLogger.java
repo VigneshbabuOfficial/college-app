@@ -167,7 +167,14 @@ public class CustomLogger implements Serializable {
 
 	public void error(String message, String requestId) {
 
-		logger.log(Level.SEVERE, getValue("message = " + message + ", requestId = " + requestId));
+		logger.log(Level.SEVERE, getValue("message = " + message + ", requestId = " + getRequestId()));
+
+	}
+
+	public void error(String message, Exception ex) {
+
+		logger.log(Level.SEVERE,
+				getValue("message = " + message + ", requestId = " + getRequestId() + ", exception = " + ex));
 
 	}
 

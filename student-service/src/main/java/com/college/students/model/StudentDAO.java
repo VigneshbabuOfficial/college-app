@@ -2,10 +2,14 @@ package com.college.students.model;
 
 import static com.college.students.utils.CustomLogger.logKeyValue;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.college.students.dto.StudentInputDTO;
 import com.college.students.utils.Constants;
 import com.college.students.utils.CustomLogger;
 import com.college.students.utils.EntityUtil;
@@ -126,6 +131,27 @@ public class StudentDAO {
 		countCriteriaQuery.where(countPredicates.toArray(new Predicate[countPredicates.size()]));
 
 		return entityManager.createQuery(countCriteriaQuery).getSingleResult();
+	}
+
+	public Optional<Student> findById(Long id) {
+		return repository.findById(id);
+	}
+
+	public Optional<Student> isStudentExist(StudentInputDTO studentInput) {
+		return repository.findByAdhaarNumOrEmail(Long.valueOf(studentInput.getAdhaarNum().get()),
+				studentInput.getEmail().get());
+	}
+
+	public Student addStudent(StudentInputDTO studentInput) {
+
+		Student newStudent = Student.builder().name(studentInput.getName().get())
+				.fatherName(studentInput.getFatherName().get()).address(studentInput.getAddress().get())
+				.adhaarNum(Long.valueOf(studentInput.getAdhaarNum().get()))
+				.dob(LocalDate.parse(studentInput.getDob().get())).contactNum(studentInput.getContactNum().get())
+				.email(studentInput.getEmail().get()).comments(studentInput.getComments())
+				.createdAt(LocalDateTime.now(ZoneId.of("UTC")).withNano(0)).build();
+
+		return repository.save(newStudent);
 	}
 
 }

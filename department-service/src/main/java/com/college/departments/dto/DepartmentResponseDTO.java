@@ -3,22 +3,14 @@ package com.college.departments.dto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.college.departments.entity.Department;
 import com.college.departments.enums.Departments;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class DepartmentResponseDTO implements Serializable {
-
-	@Autowired
-	private ObjectMapper objectMapper;
 
 	private static final long serialVersionUID = 1L;
 
@@ -76,12 +68,6 @@ public class DepartmentResponseDTO implements Serializable {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-
-	public DepartmentResponseDTO converter(Department department) {
-
-		return objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).convertValue(department,
-				DepartmentResponseDTO.class);
 	}
 
 	@Override

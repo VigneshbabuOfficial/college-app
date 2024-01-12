@@ -155,14 +155,28 @@ public class CustomLogger implements Serializable {
 
 	public void error(Long userId, Long orgId, String message, String requestId) {
 
-		logger.log(Level.SEVERE, getValue(
-				"userId = " + userId + ", orgId = " + orgId + ", message = " + message + ", requestId = " + requestId));
+		logger.log(Level.SEVERE, getValue("userId = " + userId + ", orgId = " + orgId + ", message = " + message
+				+ ", requestId = " + getRequestId()));
 
 	}
 
 	public void error(String message, String requestId) {
 
-		logger.log(Level.SEVERE, getValue("message = " + message + ", requestId = " + requestId));
+		logger.log(Level.SEVERE, getValue("message = " + message + ", requestId = " + getRequestId()));
+
+	}
+
+	public void error(String message, String requestId, Exception ex) {
+
+		logger.log(Level.SEVERE,
+				getValue("message = " + message + ", requestId = " + requestId + ", Exception = " + ex));
+
+	}
+
+	public void error(String message, Exception ex) {
+
+		logger.log(Level.SEVERE,
+				getValue("message = " + message + ", requestId = " + getRequestId() + ", Exception = " + ex));
 
 	}
 

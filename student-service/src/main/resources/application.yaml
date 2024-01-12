@@ -4,9 +4,13 @@ server:
   servlet:
     context-path: /department-service/api/v1/
 
+#spring.servlet.multipart.max-file-size
 
 #application props    
 spring:
+  servlet:
+    multipart:
+      max-file-size: 2MB
   jackson:
     serialization:
       fail-on-empty-beans: false

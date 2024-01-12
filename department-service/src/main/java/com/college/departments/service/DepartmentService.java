@@ -98,7 +98,7 @@ public class DepartmentService {
 		Department savedDepart = dao.addDepartment(departmentInput);
 
 		ResponseDTO responseDTO = SuccessDataResponseDTO.builder()
-				.data(converterConfig.converterList(savedDepart, DepartmentResponseDTO.class)).build();
+				.data(converterConfig.convertToList(savedDepart, DepartmentResponseDTO.class)).build();
 
 		log.debug(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("responseDTO", responseDTO));
 
@@ -118,7 +118,8 @@ public class DepartmentService {
 			return new ResponseEntity<>(responseDTO, HttpStatus.NOT_FOUND);
 		}
 
-		ResponseDTO responseDTO = SuccessDataResponseDTO.builder().data(Arrays.asList(departmentOpt.get())).build();
+		ResponseDTO responseDTO = SuccessDataResponseDTO.builder()
+				.data(converterConfig.convertToList(departmentOpt.get(), DepartmentResponseDTO.class)).build();
 
 		log.debug(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("responseDTO", responseDTO));
 
@@ -165,12 +166,14 @@ public class DepartmentService {
 
 		if (fields != null && fields.length > 0) {
 
-			responseDTO = SuccessDataResponseDTO.builder().data(dataListNode).page(page).limit(limit).total(total)
-					.currentPageTotal(dataListNode.size()).build();
+			responseDTO = SuccessDataResponseDTO.builder()
+					.data(converterConfig.convertToObjectNodeList(dataListNode, DepartmentResponseDTO.class)).page(page)
+					.limit(limit).total(total).currentPageTotal(dataListNode.size()).build();
 		} else {
 
-			responseDTO = SuccessDataResponseDTO.builder().data(departments).page(page).limit(limit).total(total)
-					.currentPageTotal(departments.size()).build();
+			responseDTO = SuccessDataResponseDTO.builder()
+					.data(converterConfig.converterList(departments, DepartmentResponseDTO.class)).page(page)
+					.limit(limit).total(total).currentPageTotal(departments.size()).build();
 		}
 
 		log.debug(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue("responseDTO", responseDTO));
@@ -216,7 +219,7 @@ public class DepartmentService {
 		Department savedDepart = departmentRepository.save(dept);
 
 		ResponseDTO responseDTO = SuccessDataResponseDTO.builder()
-				.data(Arrays.asList(converterConfig.converter(savedDepart, DepartmentResponseDTO.class))).build();
+				.data(converterConfig.convertToList(savedDepart, DepartmentResponseDTO.class)).build();
 
 		log.debug(String.format(METHOD_LOG_STR, "updateDepartment") + logKeyValue("responseDTO", responseDTO));
 

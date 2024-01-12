@@ -4,15 +4,26 @@ import static com.college.students.utils.CustomLogger.logKeyValue;
 
 import java.util.Arrays;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.college.students.dto.Create;
+import com.college.students.dto.ErrorResponsesDTO;
 import com.college.students.dto.ResponseDTO;
+import com.college.students.dto.StudentInputDTO;
 import com.college.students.service.StudentService;
+import com.college.students.utils.CommonUtil;
 import com.college.students.utils.Constants;
 import com.college.students.utils.CustomLogger;
 import com.college.students.utils.EndPointConstants;
@@ -59,11 +70,42 @@ public class StudentController {
 
 	}
 
-	/*
-	 * @GetMapping(EndPointConstants.ID) public ResponseEntity<ResponseDTO>
-	 * getStudentById(@PathVariable final Long id) {
-	 * log.info(String.format(METHOD_LOG_STR, "getStudentById") + logKeyValue("id",
-	 * id)); return service.getDepartmentById(id); }
-	 */
+	@GetMapping(path = EndPointConstants.ID)
+	public ResponseEntity<ResponseDTO> getStudentById(@PathVariable(name = Constants.ID) final Long studentId) {
+		log.info(String.format(METHOD_LOG_STR, "getStudentById") + logKeyValue(Constants.STUDENT_ID, studentId));
+		return studentService.getStudentById(studentId);
+	}
+
+	@PostMapping(path = EndPointConstants.ID + EndPointConstants.UPLOAD_IMAGE, consumes = {
+			MediaType.MULTIPART_FORM_DATA_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseDTO> uploadImage(@PathVariable(name = Constants.ID) final Long studentId,
+			@RequestParam(name = Constants.IMAGE, required = true) MultipartFile file) {
+		log.info(String.format(METHOD_LOG_STR, "uploadImage") + logKeyValue(Constants.STUDENT_ID, studentId)
+				+ logKeyValue(Constants.FILE_NAME, file.getOriginalFilename()));
+		return studentService.uploadImage(studentId, file);
+	}
+
+	@GetMapping(path = EndPointConstants.ID + EndPointConstants.DOWNLOAD_IMAGE)
+	public ResponseEntity<?> downloadImage(@PathVariable(name = Constants.ID) final Long studentId) {
+		log.info(String.format(METHOD_LOG_STR, "downloadImage") + logKeyValue(Constants.STUDENT_ID, studentId));
+		return studentService.downloadImage(studentId);
+	}
+
+	@PostMapping
+	public ResponseEntity<ResponseDTO> addStudent(
+			@Validated(Create.class) @RequestBody(required = true) StudentInputDTO studentInput,
+			BindingResult bindingResult) {
+
+		log.info(String.format(METHOD_LOG_STR, "addStudent") + logKeyValue(Constants.STUDENT_INPUT, studentInput));
+
+		if (bindingResult.hasErrors()) {
+			ErrorResponsesDTO responseDTO = CommonUtil.buildBindingResultErrors(bindingResult, requestId.getId());
+			log.error(String.format(METHOD_LOG_STR, "addStudent") + logKeyValue(Constants.RESPONSE_DTO, responseDTO));
+			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+		}
+
+		return studentService.addStudent(studentInput);
+
+	}
 
 }
