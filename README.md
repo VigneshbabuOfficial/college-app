@@ -106,7 +106,7 @@ comments
 created_at
 updated_at
 ```
-##### SERVICE 2 - STUDENT SERVICE
+##### SERVICE 2 - STUDENT SERVICE & FACULTY SERVICE
 ```
 table : students
 columns :
