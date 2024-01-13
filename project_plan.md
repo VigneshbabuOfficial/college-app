@@ -3,6 +3,8 @@ PROJECT PLAN
 > Faculty should log into the application and session can be maintained in the Faculty service. From the Faculty service using M2M token all other services Accounts, Attendance, Exams and Fee service should be communicated.
 >
 > Student should log into the application and session can be maintained in the Student service. From the Student service using M2M token all other services Accounts, Attendance, Exams and Fee service should be communicated based on the Student ID.
+>
+> Exam support service to be implemented to update the exam marks automatically by uploading the exam result as a excel sheet like a Scheduler service.
 
 
 <img width="755" alt="image" src="https://github.com/VigneshbabuOfficial/college-app/assets/70185865/1484a11d-5643-4a1b-a23c-08d88addccce">
@@ -32,5 +34,7 @@ PROJECT PLAN
 > - [ ] Implementation of AuthO Authentication with Microservice Arch,.
 >
 > - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
+>
+> - [ ] Implementation of EXAM SERVICE and should support the uploading the excel sheet of students exam mark and same to be updated for all the students by scheduler service.
 
 
