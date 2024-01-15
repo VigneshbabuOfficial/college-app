@@ -86,4 +86,30 @@ CREATE TABLE IF NOT EXISTS public.student
 
 ```
 
+```SQL
+
+MY SQL TABLE FACULTY
+
+-- DROP TABLE IF EXISTS faculty;
+
+CREATE TABLE faculty
+(
+    id 					INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name 				VARCHAR(255) NOT NULL,
+    father_name 		VARCHAR(255) NOT NULL,
+    address 			TEXT,
+    adhaar_num 			BIGINT(12),
+    dob 				DATE,
+    contact_num 		VARCHAR(255) NOT NULL,
+    email 				VARCHAR(255) NOT NULL,
+    profile_pic 		BLOB,
+    comments 			TEXT,
+    created_at 			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at 			TIMESTAMP,
+    UNIQUE KEY faculty_email_uk (email),
+    UNIQUE KEY faculty_adhaar_num_uk (adhaar_num)
+);
+
+```
+
 
