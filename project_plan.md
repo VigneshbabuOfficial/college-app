@@ -6,11 +6,11 @@ PROJECT PLAN
 >
 > Exam support service to be implemented to update the exam marks automatically by uploading the exam result as a excel sheet like a Scheduler service.
 >
-> Accounts service - Springboot - gradle - mysql - jar </br> 
-> Attendance service - Springboot - gradle - postgres - jar </br>
-> Exam service - Springboot - maven - postgres - jar </br>
-> Exam support service - Springboot - maven - postgres - jar </br>
-> Fee Service - Springboot - maven - mysql - jar </br>
+> Accounts service - Springboot - gradle - mysql - flyway - jar </br> 
+> Attendance service - Springboot - gradle - postgres - flyway - jar </br>
+> Exam service - Springboot - maven - postgres - flyway - jar </br>
+> Exam support service - Springboot - maven - postgres - flyway - jar </br>
+> Fee Service - Springboot - maven - mysql - flyway - jar </br>
 
 
 <img width="755" alt="image" src="https://github.com/VigneshbabuOfficial/college-app/assets/70185865/1484a11d-5643-4a1b-a23c-08d88addccce">
