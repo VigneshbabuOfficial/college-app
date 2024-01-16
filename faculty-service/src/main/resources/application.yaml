@@ -1,0 +1,49 @@
+#server props
+server:
+  port: 8081
+  servlet:
+    context-path: /faculty-service/api/v1/
+
+
+#application props    
+spring:
+  servlet:
+    multipart:
+      max-file-size: 2MB
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+    deserialization:
+      fail-on-unknown-properties: false
+    mapper:
+      ALLOW_COERCION_OF_SCALARS: false
+      
+#  application:
+#    name: faculty-service
+
+# TODO - use MySQL DB
+#database props
+  datasource:
+    url: jdbc:mysql://localhost:3306/college_students_db
+    username: root
+    password: admin@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+   database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+   generate-ddl: true
+   show-sql: true    
+   properties:
+    hibernate: 
+#     ddl-auto: update 
+#     jdbc: 
+#     lob:
+#        '[non_contextual_creation]': true
+
+
+#log props
+logging:
+  level:
+    root: info
+    com.college.faculty: debug
+
+    
