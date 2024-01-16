@@ -92,9 +92,9 @@ MY SQL TABLE FACULTY
 
 -- DROP TABLE IF EXISTS faculty;
 
-CREATE TABLE faculty
+CREATE TABLE IF NOT EXISTS faculty
 (
-    id 					INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id 					INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name 				VARCHAR(255) NOT NULL,
     father_name 		VARCHAR(255) NOT NULL,
     address 			TEXT,
@@ -107,9 +107,8 @@ CREATE TABLE faculty
     created_at 			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at 			TIMESTAMP,
     UNIQUE KEY faculty_email_uk (email),
-    UNIQUE KEY faculty_adhaar_num_uk (adhaar_num)
+    UNIQUE KEY faculty_adhaar_num_uk (adhaar_num),
 );
-
 ```
 
 
