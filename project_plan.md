@@ -17,17 +17,18 @@ PROJECT PLAN
 
 -----------------------------------------
 
-> - [x] Implementation of Service 1 ( Department Service )
+> - [x] Implementation of Service 1 ( DEPARTMENT Service )
 >
 > - [x] Implementation of Service 2 ( STUDENT SERVICE )
 >
-> - [ ] Implementation of Service 3 ( FACULTY SERVICE )
+> - [X] Implementation of Service 3 ( FACULTY SERVICE )
 >
-> - [ ] Implementation of Service 4 ( ACCOUNT SERVICE )
-> 
-> - [ ] Implementation of Microservice Architecture for STUDENT SERVICE & ACCOUNT SERVICE & FACULTY SERVICE </br>
-> ( Faculty service should send request to ACCOUNT service with facultyId as request param and also with other optional params ( like department=CSE&pass_out_year=2020 ) and for the STUDENT service studentId should be sent withoud any filter params and make sure not to allow to view / edit / delete other student records )
->  
+> - [ ] Implementation of Cache mechanism
+>
+> - [ ] Implementation of Authentication
+>
+> - [ ] Microservice Architecture Implementation ( api, gateway, ELK, Kafka, ... )
+>
 > - [ ] Implementation of Basic JWT Authentication.
 > 
 > - [ ] Implementation of JWT Authentication with Microservice Arch,.
@@ -39,9 +40,21 @@ PROJECT PLAN
 > - [ ] Implementation of Basic AuthO Authentication.
 > 
 > - [ ] Implementation of AuthO Authentication with Microservice Arch,.
->
-> - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
+>       
+> - [ ] Implementation of Service 4 ( ACCOUNT SERVICE )
+> 
+> - [ ] Implementation of Microservice Architecture for STUDENT SERVICE & ACCOUNT SERVICE & FACULTY SERVICE </br>
+> ( Faculty service should send request to ACCOUNT service with facultyId as request param and also with other optional params ( like department=CSE&pass_out_year=2020 ) and for the STUDENT service studentId should be sent withoud any filter params and make sure not to allow to view / edit / delete other student records )
 >
 > - [ ] Implementation of EXAM SERVICE and should support the uploading the excel sheet of students exam mark and same to be updated for all the students by scheduler service.
+>        
+> - [ ] Exam support service to be implemented to update the exam marks automatically by uploading the exam result as a excel sheet like a Scheduler service.
+>
+> - [ ] Implemention of Attendance Service
+>       
+> - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
+
+
+
 
 
