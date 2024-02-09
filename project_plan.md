@@ -25,8 +25,6 @@ PROJECT PLAN
 >
 > - [ ] Implementation of Cache mechanism
 >
-> - [ ] Implementation of Authentication
->
 > - [ ] Microservice Architecture Implementation ( api, gateway, ELK, Kafka, ... )
 >
 > - [ ] Implementation of Basic JWT Authentication.
@@ -35,7 +33,7 @@ PROJECT PLAN
 > 
 > - [ ] Implementation of Basic OAuth Authentication.
 > 
-> - [ ] Implementation of OAuth Authentication with Microservice Arch,.
+> - [ ] Implementation of Basic OAuth Authentication with Microservice Arch,.
 > 
 > - [ ] Implementation of Basic AuthO Authentication.
 > 
@@ -54,7 +52,7 @@ PROJECT PLAN
 >       
 > - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
 
-
+--------------------------------------
 
 
 
