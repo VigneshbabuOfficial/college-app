@@ -1,10 +1,79 @@
 PROJECT PLAN
 
 
+### ROUGH PLAN
+
+> DONE = wildfly 
+> 
+> DONE = postgres + mysql
+> 
+> DONE = java.util.logging - log management- separate log
+> 
+> DONE = filter, sort & pagination params
+> 
+> DONE = springboot crud
+> 
+> DONE = mockito test case
+> 
+> spring cache </br>
+	> what is cache </br>
+	> springboot with Redis Cache </br>
+	> springboot with MongoDB Cache
+---------------------------------------
+> Authenitication Service
+> 
+> authentication & authorization  ( max session = 1 )
+> 
+> own user account
+> 
+> github
+> 
+> gmail
+> 
+> facebook
+> 
+> linkedin
+> 
+> webhooks
+---------------------------------------
+> microservices
+> 
+> openapi
+> 
+> flywayDB
+> 
+> pomparent after 2 services
+> 
+> @Slf4j - log management- separate log ( any one of the services )
+>
+> ELK
+>  
+> apigateway
+>
+> JMS & Active MQ
+> 
+> kafka
+---------------------------------------
+
+> deployment
+> 
+> Github pipeline
+> 
+> AWS
+> 
+> jenkins
+> 
+> docker
+> 
+> kubernetes
+______________________________________________________________
+
+
 #### api requests, responses and pages design
-##### login / logout
 
 >  Teacher View
+
+##### login ( common for both )
 
 ##### HOME PAGE ( page-1 afer loggedin ) 
 <img width="576" alt="image" src="https://github.com/VigneshbabuOfficial/college-app/assets/70185865/47bd7494-cc68-412d-9f61-03a1c9637fbc">
@@ -42,12 +111,17 @@ PROJECT PLAN
 > Save & Next button to enable Teacher enter the student fee details
 
 ##### settings - edit font type & size
-##### logout
+
+##### logout ( common for both )
 
 -------------------------------- 
 
 > Student View
+
+##### login ( common for both )
+
 ##### HOME PAGE ( page-1 afer loggedin )
+
 > showing the student personal info ( edit & save )
 >
 > profile pic edit in popup
