@@ -71,6 +71,20 @@ ______________________________________________________________
 
 #### api requests, responses and pages design
 
+##### filter format
+> filter=name:=:EEE,comments:=:test <br/>
+> ORfilter=comments:=:test,id:=:3,name:=:EEE
+
+##### sort format
+> sort=name:asc
+
+##### pagination format 
+> page=1 & limit=20
+
+##### fields 
+> fields=name
+------------------------------------
+
 >  Teacher View
 
 ##### login ( common for both )
