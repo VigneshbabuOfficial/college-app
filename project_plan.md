@@ -19,7 +19,10 @@ PROJECT PLAN
 	> what is cache </br>
 	> springboot with Redis Cache </br>
 	> springboot with MongoDB Cache
+	> springboot with Caffeine DB Cache
+
 ---------------------------------------
+
 > Authenitication Service
 > 
 > authentication & authorization  ( max session = 1 )
@@ -35,7 +38,9 @@ PROJECT PLAN
 > linkedin
 > 
 > webhooks
+
 ---------------------------------------
+
 > microservices
 > 
 > openapi
