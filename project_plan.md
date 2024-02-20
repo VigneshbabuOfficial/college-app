@@ -18,8 +18,8 @@ PROJECT PLAN
 > DONE = spring cache ---------  REF : [springboot-redis-cache-demo](https://github.com/VigneshbabuOfficial/springboot-redis-cache-demo) </br>
 	> what is cache </br>
 	> DONE = springboot with Redis Cache </br>
-	> springboot with MongoDB Cache </br>
-	> springboot with Caffeine DB Cache
+	> NOT DONE = springboot with MongoDB Cache </br>
+	> NOT DONE = springboot with Caffeine DB Cache
 >
 > Microservice Architecture Implementation
 
@@ -81,7 +81,7 @@ PROJECT PLAN
 >
 > - [X] Implementation of Service 3 ( FACULTY SERVICE )
 >
-> - [X] Implementation of Cache mechanism
+> - [INP] Implementation of Cache mechanism
 >
 > - [ ] Microservice Architecture Implementation ( api, gateway, ELK, Kafka, ... )
 >
