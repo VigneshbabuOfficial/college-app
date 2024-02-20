@@ -72,6 +72,12 @@ PROJECT PLAN
 > kubernetes
 > 
 -------------------------------
+> Unit Test case by Mockito
+>
+> Unit Test case by JUnit
+> >
+---------------
+---------------
 
 #### TASKS
 
@@ -109,6 +115,10 @@ PROJECT PLAN
 > - [ ] Implemention of Attendance Service
 >       
 > - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
+> 
+> - [ ] Unit Test case by Mockito
+>       
+> - [ ] Unit Test case by JUnit
 
 --------------------------------------
 
