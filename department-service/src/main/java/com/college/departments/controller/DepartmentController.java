@@ -5,8 +5,11 @@ import static com.college.departments.utils.CustomLogger.logKeyValue;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +33,9 @@ import com.college.departments.utils.CustomLogger;
 import com.college.departments.utils.EndPointConstants;
 import com.college.departments.utils.LoggingKeys;
 import com.college.departments.utils.RequestId;
+import com.college.departments.utils.ResponseEntityCustom;
 
+@CacheConfig(cacheNames = "department")
 @RestController
 @RequestMapping(EndPointConstants.DEPARTMENTS)
 @Validated
@@ -52,7 +57,7 @@ public class DepartmentController {
 	}
 
 	@PostMapping
-	public ResponseEntity<ResponseDTO> addDepartment(
+	public ResponseEntityCustom<ResponseDTO> addDepartment(
 			@Validated(value = Create.class) @RequestBody(required = true) final DepartmentInputDTO departmentInput,
 			BindingResult bindingResult) {
 		log.info(String.format(METHOD_LOG_STR, "addDepartment")
@@ -62,26 +67,30 @@ public class DepartmentController {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildBindingResultErrors(bindingResult, requestId.getId());
 			log.error(String.format(METHOD_LOG_STR, "addDepartment")
 					+ logKeyValue(LoggingKeys.RESPONSE_DTO, responseDTO));
-			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
+			return new ResponseEntityCustom<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
 		return service.addDepartment(departmentInput);
 	}
 
 	@DeleteMapping(path = EndPointConstants.IDS)
-	public ResponseEntity<ResponseDTO> deleteDepartments(@PathVariable final List<Long> ids) {
+	@CacheEvict(cacheNames = "department", key = "#ids", allEntries = true)
+	public ResponseEntityCustom<ResponseDTO> deleteDepartments(@PathVariable final List<Long> ids) {
 		log.info(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("ids", ids));
 		return service.deleteDepartments(ids);
 	}
 
+//	@Cacheable(value = "department", key = "#id", condition = "#result != null")
+
 	@GetMapping(path = EndPointConstants.ID)
-	public ResponseEntity<ResponseDTO> getDepartmentById(@PathVariable final Long id) {
+	@Cacheable(value = "department", key = "#id")
+	public ResponseEntityCustom<ResponseDTO> getDepartmentById(@PathVariable final Long id) {
 		log.info(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("id", id));
 		return service.getDepartmentById(id);
 	}
 
 	@GetMapping
-	public ResponseEntity<ResponseDTO> getDepartments(
+	public ResponseEntityCustom<ResponseDTO> getDepartments(
 	// @formatter:off
 	@RequestParam(name = "filter",required = false) String[] filterParams,
 	@RequestParam(name = "ORfilter",required = false) String[] orFilterParams,
@@ -102,7 +111,8 @@ public class DepartmentController {
 	}
 
 	@PutMapping(path = EndPointConstants.ID)
-	public ResponseEntity<ResponseDTO> updateDepartment(@PathVariable Long id,
+	@CachePut(cacheNames = "department", key = "#id")
+	public ResponseEntityCustom<ResponseDTO> updateDepartment(@PathVariable Long id,
 			@Validated(value = Update.class) @RequestBody(required = true) DepartmentInputDTO departmentInput) {
 		log.info(String.format(METHOD_LOG_STR, "updateDepartment") + logKeyValue("id", id)
 				+ logKeyValue("departmentInput", departmentInput));

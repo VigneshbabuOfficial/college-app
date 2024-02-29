@@ -1,11 +1,13 @@
-#server props
+
+
+#### ------- server props --------
 server:
   port: 8081
   servlet:
     context-path: /department-service/api/v1/
 
 
-#application props    
+#### ------- application props -------    
 spring:
   jackson:
     serialization:
@@ -18,7 +20,8 @@ spring:
 #  application:
 #    name: department-service
 
-#database props
+
+#### ------- database props -------
   datasource:
     url: jdbc:postgresql://localhost/college_students_db
     username: postgres
@@ -34,9 +37,17 @@ spring:
 #     jdbc: 
 #     lob:
 #        '[non_contextual_creation]': true
-           
+
+
+#### ------- redis cache props ------------
+  cache:
+    type: redis
+    host: localhost
+    port: 6379
+    redis:
+      time-to-live: 60000           
   
-#log props
+#### ------- log props --------
 logging:
   level:
     root: info
@@ -44,5 +55,9 @@ logging:
   file: 
     path: logs/
     name: logs/department-service.log    
+
+
+
+
 
 
