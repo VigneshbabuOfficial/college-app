@@ -15,11 +15,16 @@ PROJECT PLAN
 > 
 > DONE = mockito test case
 > 
-> spring cache </br>
+> DONE = spring cache ---------  REF : [springboot-redis-cache-demo](https://github.com/VigneshbabuOfficial/springboot-redis-cache-demo) </br>
 	> what is cache </br>
-	> springboot with Redis Cache </br>
-	> springboot with MongoDB Cache
+	> DONE = springboot with Redis Cache </br>
+	> NOT DONE = springboot with MongoDB Cache </br>
+	> NOT DONE = springboot with Caffeine DB Cache
+>
+> Microservice Architecture Implementation
+
 ---------------------------------------
+
 > Authenitication Service
 > 
 > authentication & authorization  ( max session = 1 )
@@ -34,10 +39,8 @@ PROJECT PLAN
 > 
 > linkedin
 > 
-> webhooks
 ---------------------------------------
-> microservices
-> 
+
 > openapi
 > 
 > flywayDB
@@ -53,6 +56,7 @@ PROJECT PLAN
 > JMS & Active MQ
 > 
 > kafka
+> 
 ---------------------------------------
 
 > deployment
@@ -66,7 +70,57 @@ PROJECT PLAN
 > docker
 > 
 > kubernetes
-______________________________________________________________
+> 
+-------------------------------
+> Unit Test case by Mockito
+>
+> Unit Test case by JUnit
+> >
+---------------
+---------------
+
+#### TASKS
+
+> - [x] Implementation of Service 1 ( DEPARTMENT Service )
+>
+> - [x] Implementation of Service 2 ( STUDENT SERVICE )
+>
+> - [X] Implementation of Service 3 ( FACULTY SERVICE )
+>
+> - [INP] Implementation of Cache mechanism
+>
+> - [ ] Microservice Architecture Implementation ( api, gateway, ELK, Kafka, ... )
+>
+> - [ ] Implementation of Basic JWT Authentication.
+> 
+> - [ ] Implementation of JWT Authentication with Microservice Arch,.
+> 
+> - [ ] Implementation of Basic OAuth Authentication.
+> 
+> - [ ] Implementation of Basic OAuth Authentication with Microservice Arch,.
+> 
+> - [ ] Implementation of Basic AuthO Authentication.
+> 
+> - [ ] Implementation of AuthO Authentication with Microservice Arch,.
+>       
+> - [ ] Implementation of Service 4 ( ACCOUNT SERVICE )
+> 
+> - [ ] Implementation of Microservice Architecture for STUDENT SERVICE & ACCOUNT SERVICE & FACULTY SERVICE </br>
+> ( Faculty service should send request to ACCOUNT service with facultyId as request param and also with other optional params ( like department=CSE&pass_out_year=2020 ) and for the STUDENT service studentId should be sent withoud any filter params and make sure not to allow to view / edit / delete other student records )
+>
+> - [ ] Implementation of EXAM SERVICE and should support the uploading the excel sheet of students exam mark and same to be updated for all the students by scheduler service.
+>        
+> - [ ] Exam support service to be implemented to update the exam marks automatically by uploading the exam result as a excel sheet like a Scheduler service.
+>
+> - [ ] Implemention of Attendance Service
+>       
+> - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
+> 
+> - [ ] Unit Test case by Mockito
+>       
+> - [ ] Unit Test case by JUnit
+
+--------------------------------------
 
 
 #### api requests, responses and pages design
@@ -169,44 +223,7 @@ ______________________________________________________________
 
 -----------------------------------------
 
-#### TASKS
 
-> - [x] Implementation of Service 1 ( DEPARTMENT Service )
->
-> - [x] Implementation of Service 2 ( STUDENT SERVICE )
->
-> - [X] Implementation of Service 3 ( FACULTY SERVICE )
->
-> - [ ] Implementation of Cache mechanism
->
-> - [ ] Microservice Architecture Implementation ( api, gateway, ELK, Kafka, ... )
->
-> - [ ] Implementation of Basic JWT Authentication.
-> 
-> - [ ] Implementation of JWT Authentication with Microservice Arch,.
-> 
-> - [ ] Implementation of Basic OAuth Authentication.
-> 
-> - [ ] Implementation of Basic OAuth Authentication with Microservice Arch,.
-> 
-> - [ ] Implementation of Basic AuthO Authentication.
-> 
-> - [ ] Implementation of AuthO Authentication with Microservice Arch,.
->       
-> - [ ] Implementation of Service 4 ( ACCOUNT SERVICE )
-> 
-> - [ ] Implementation of Microservice Architecture for STUDENT SERVICE & ACCOUNT SERVICE & FACULTY SERVICE </br>
-> ( Faculty service should send request to ACCOUNT service with facultyId as request param and also with other optional params ( like department=CSE&pass_out_year=2020 ) and for the STUDENT service studentId should be sent withoud any filter params and make sure not to allow to view / edit / delete other student records )
->
-> - [ ] Implementation of EXAM SERVICE and should support the uploading the excel sheet of students exam mark and same to be updated for all the students by scheduler service.
->        
-> - [ ] Exam support service to be implemented to update the exam marks automatically by uploading the exam result as a excel sheet like a Scheduler service.
->
-> - [ ] Implemention of Attendance Service
->       
-> - [ ] Implementation of Microservice Architecture for Attendance, Exam and Fee services should be invoked from student service only. like student/accounts , student/exam .... )
-
---------------------------------------
 
 
 
