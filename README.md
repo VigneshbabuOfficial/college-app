@@ -4,7 +4,7 @@
 | ------------- | ------------- |
 | Java  | Java 17  |
 | Framework  | Spring boot  |
-| DB  | Postgres & MySQL  |
+| DB  | Postgres & MySQL |
 
 
 > [API Documentation](https://documenter.getpostman.com/view/25187704/2s9YsJCCkX)
