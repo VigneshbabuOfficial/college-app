@@ -15,13 +15,18 @@ PROJECT PLAN
 > 
 > DONE = mockito test case
 > 
-> DONE = spring cache ---------  REF : [springboot-redis-cache-demo](https://github.com/VigneshbabuOfficial/springboot-redis-cache-demo) </br>
+> PARTIALLY DONE = spring cache ---------  REF : [springboot-redis-cache-demo](https://github.com/VigneshbabuOfficial/springboot-redis-cache-demo) </br>
 	> what is cache </br>
 	> DONE = springboot with Redis Cache </br>
 	> NOT DONE = springboot with MongoDB Cache </br>
 	> NOT DONE = springboot with Caffeine DB Cache
 >
-> Microservice Architecture Implementation
+> Microservice Architecture Implementation </br>
+	> Eureka Server and Client implementation </br>
+	> API Gateway Implementation </br>
+	> ELK implementation </br>
+	> Fault Tolerance with Resilience4j </br>
+	> Message Queue with Kafka    
 
 ---------------------------------------
 
@@ -87,9 +92,15 @@ PROJECT PLAN
 >
 > - [X] Implementation of Service 3 ( FACULTY SERVICE )
 >
-> - [INP] Implementation of Cache mechanism
+> - [ ] Implementation of Cache mechanism - NOT DONE. Since we are facing error in JSON response Serialization from Redis server.
 >
-> - [ ] Microservice Architecture Implementation ( api, gateway, ELK, Kafka, ... )
+> - [INP] Microservice Architecture Implementation </br>
+	1. Eureka Server ( Service Registry ) and Client implementation </br>
+	2. API Gateway Implementation </br>
+ 	3. Common RequestId implemenation </br>
+	4. ELK implementation </br>
+	5. Fault Tolerance with Resilience4j </br>
+	6. Message Queue with Kafka  
 >
 > - [ ] Implementation of Basic JWT Authentication.
 > 
