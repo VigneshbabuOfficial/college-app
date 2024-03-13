@@ -13,3 +13,12 @@
 
 
 
+
+#### PRE-REQUISITES TO START THE APPLICATION
+#### HOW TO START THE REDIS CACHE SERVER ?
+> open ubuntu CLI -> enter this command `sudo service redis-server start`. enter the password followed by the command. <br/>
+then enter this command -> `redis-cli` -> `ping`  -> PONG will be displayed.
+
+#### HOW TO START THE MYSQL SERVER ?
+> OPEN RUN COMMAND -> enter `services.msc` <br/>
+CHOOSE MYSQL_X & start the service.
