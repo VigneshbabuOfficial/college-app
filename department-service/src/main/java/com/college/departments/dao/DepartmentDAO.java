@@ -22,6 +22,7 @@ import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +59,7 @@ public class DepartmentDAO {
 		return repository.save(newDepartment);
 	}
 
+	@Cacheable(value = "department", key = "#id")
 	public Optional<Department> findById(Long id) {
 
 		return repository.findById(id);

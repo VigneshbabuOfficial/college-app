@@ -45,7 +45,8 @@ spring:
     host: localhost
     port: 6379
     redis:
-      time-to-live: 60000           
+      time-to-live: 60000
+      key-prefix: "department-service:"           
   
 #### ------- log props --------
 logging:

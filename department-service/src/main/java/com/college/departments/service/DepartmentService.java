@@ -12,6 +12,7 @@ import java.util.Optional;
 import javax.persistence.Tuple;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.college.departments.config.ConverterConfig;
@@ -31,7 +32,6 @@ import com.college.departments.utils.CustomLogger;
 import com.college.departments.utils.EntityUtil;
 import com.college.departments.utils.ErrorCodeMessage;
 import com.college.departments.utils.RequestId;
-import com.college.departments.utils.ResponseEntityCustom;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -67,7 +67,7 @@ public class DepartmentService {
 		this.temp = temp;
 	}
 
-	public ResponseEntityCustom<ResponseDTO> addDepartment(DepartmentInputDTO departmentInput) {
+	public ResponseEntity<ResponseDTO> addDepartment(DepartmentInputDTO departmentInput) {
 
 		log.info(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("departmentInput", departmentInput));
 
@@ -78,7 +78,7 @@ public class DepartmentService {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
 					departmentInput.getName().get() + " Department already exists", requestId.getId());
 			log.debug(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("responseDTO", responseDTO));
-			return new ResponseEntityCustom<>(responseDTO, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
 		// ----------------------------- testing method stub
@@ -102,10 +102,10 @@ public class DepartmentService {
 
 		log.debug(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("responseDTO", responseDTO));
 
-		return new ResponseEntityCustom<>(responseDTO, HttpStatus.CREATED);
+		return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 	}
 
-	public ResponseEntityCustom<ResponseDTO> getDepartmentById(Long id) {
+	public ResponseEntity<ResponseDTO> getDepartmentById(Long id) {
 
 		log.info(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("id", id));
 
@@ -115,7 +115,7 @@ public class DepartmentService {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
 					"Department does not exists", requestId.getId());
 			log.error(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("responseDTO", responseDTO));
-			return new ResponseEntityCustom<>(responseDTO, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(responseDTO, HttpStatus.NOT_FOUND);
 		}
 
 		ResponseDTO responseDTO = SuccessDataResponseDTO.builder()
@@ -123,11 +123,11 @@ public class DepartmentService {
 
 		log.debug(String.format(METHOD_LOG_STR, "getDepartmentById") + logKeyValue("responseDTO", responseDTO));
 
-		return new ResponseEntityCustom<>(responseDTO, HttpStatus.OK);
+		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 
 	}
 
-	public ResponseEntityCustom<ResponseDTO> getDepartments(String[] filterParams, String[] orFilterParams,
+	public ResponseEntity<ResponseDTO> getDepartments(String[] filterParams, String[] orFilterParams,
 			String[] sortParams, int page, int limit, String[] fields) {
 
 		log.info(String.format(METHOD_LOG_STR, "getDepartments")
@@ -155,7 +155,7 @@ public class DepartmentService {
 
 			log.error(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue("exception", e.getMessage())
 					+ logKeyValue("responseDTO", responseDTO));
-			return new ResponseEntityCustom<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 		if (!tupleDataList.isEmpty()) {
@@ -178,11 +178,11 @@ public class DepartmentService {
 
 		log.debug(String.format(METHOD_LOG_STR, "getDepartments") + logKeyValue("responseDTO", responseDTO));
 
-		return new ResponseEntityCustom<>(responseDTO, HttpStatus.OK);
+		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 
 	}
 
-	public ResponseEntityCustom<ResponseDTO> updateDepartment(Long id, DepartmentInputDTO departmentInput) {
+	public ResponseEntity<ResponseDTO> updateDepartment(Long id, DepartmentInputDTO departmentInput) {
 
 		log.info(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("departmentInput", departmentInput));
 
@@ -192,7 +192,7 @@ public class DepartmentService {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
 					"Sorry! Department doesn't exists", requestId.getId());
 			log.debug(String.format(METHOD_LOG_STR, "addDepartment") + logKeyValue("responseDTO", responseDTO));
-			return new ResponseEntityCustom<>(responseDTO, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
 		// name validation
@@ -201,7 +201,7 @@ public class DepartmentService {
 			ErrorResponsesDTO responseDTO = CommonUtil.buildErrorResponse(ErrorCodeMessage.INVALID_DATA,
 					departmentInput.getName().get() + " Department already exists", requestId.getId());
 			log.debug(String.format(METHOD_LOG_STR, "updateDepartment") + logKeyValue("responseDTO", responseDTO));
-			return new ResponseEntityCustom<>(responseDTO, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
 		Department dept = optionalDept.get();
@@ -223,10 +223,10 @@ public class DepartmentService {
 
 		log.debug(String.format(METHOD_LOG_STR, "updateDepartment") + logKeyValue("responseDTO", responseDTO));
 
-		return new ResponseEntityCustom<>(responseDTO, HttpStatus.CREATED);
+		return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
 	}
 
-	public ResponseEntityCustom<ResponseDTO> deleteDepartments(final List<Long> ids) {
+	public ResponseEntity<ResponseDTO> deleteDepartments(final List<Long> ids) {
 
 		log.info(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("ids", ids));
 
@@ -243,7 +243,7 @@ public class DepartmentService {
 					"Department(s) doesn't exists", requestId.getId());
 			log.debug(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("responseDTO", responseDTO)
 					+ logKeyValue("invalidIds", invalidIds));
-			return new ResponseEntityCustom<>(responseDTO, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
 		}
 
 		dao.deleteDepartments(departments);
@@ -252,7 +252,7 @@ public class DepartmentService {
 
 		log.debug(String.format(METHOD_LOG_STR, "deleteDepartments") + logKeyValue("responseDTO", responseDTO));
 
-		return new ResponseEntityCustom<>(responseDTO, HttpStatus.OK);
+		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 	}
 
 }
