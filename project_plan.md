@@ -24,13 +24,13 @@ PROJECT PLAN
 > Microservice Architecture Implementation </br>
 	> Eureka Server and Client implementation </br>
 	> API Gateway Implementation </br>
-	> ELK implementation </br>
+	> ELK implementation / Splunk implementation </br>
 	> Fault Tolerance with Resilience4j </br>
 	> Message Queue with Kafka    
 
 ---------------------------------------
 
-> Authenitication Service
+> Authentication Service
 > 
 > authentication & authorization  ( max session = 1 )
 > 
